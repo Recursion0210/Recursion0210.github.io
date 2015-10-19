@@ -1,35 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Your awesome title</title>
-    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+    <title>点滴</title>
+    <description>空谈误国-实干兴邦
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 19 Oct 2015 11:38:31 +0800</pubDate>
-    <lastBuildDate>Mon, 19 Oct 2015 11:38:31 +0800</lastBuildDate>
+    <pubDate>Mon, 19 Oct 2015 16:22:20 +0800</pubDate>
+    <lastBuildDate>Mon, 19 Oct 2015 16:22:20 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+        <title>博文的开始</title>
+        <description>&lt;p&gt;起这个题目，是向我一个学长&lt;a href=&quot;http://blog.csdn.net/decting/article/details/8062457&quot;&gt;致敬&lt;/a&gt;。&lt;/p&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;p&gt;今天是2015年元旦，照这样说来就算是去年，我认识了这个学长。当初是请教学长安卓问题，然后由于时间问题直接到学长寝室请他帮忙调程序。说真的，看着高手调程序真的能学到太多，他们解决问题的思路和方法真的很值得我们去学习，我记得当时学会了用Log.i(“”,”“)来跟踪程序运行状况。&lt;/p&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+&lt;p&gt;进入大学三年了，期间从网上学习了很多东西，一直以来我只是有一个互联网内容消费者，没有创造过什么。CSDN的账号创建很久了，每次看到技术牛人写的关于各类问题的解决方法以及他们自身对于问题的思考，就非常的崇拜以及感谢他们的付出。经常在看完他们的技术博客之后，在想自己是不是也能写一点什么，就像知乎说的那样，与世界分享你的知识和见解，然而一拖就拖到现在。其实，原来也真的什么都不会，没得内容来与大家分享。渐渐的我也做了一些项目，成为了学弟们的学长，我想我也应该把自己遇到问题的一些解决方法和对这些方法的思考写出来，而不是只记录在我自己的OneNote里面。&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;我是物联网专业学生，所开发的一些也都是软硬件结合的项目，我会在此与大家分享经验。&lt;/p&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;Jekyll’s dedicated Help repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;好了，那这第一篇文章就作为我新阶段的开始，2015年我会准备考研，因此会对相关的科目进行复习与总结，我也会在此记录我考研路上对于专业相关问题的感悟。
+   最后，从学长那抄一句：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;我们的目标是没有遗憾。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;以上是我在2015年1月1日在CSDN上写的第一篇博文，&lt;/p&gt;
+
+&lt;p&gt;当时已值大三，开博的目的是可以分享一些项目经验以及记录一下考研备战路上的点点滴滴。可惜当时准备考研，后期在写过一篇《Android-Lint使用后的错误解决》之后便停滞项目开发了，后来到了五月份，我放弃了考研，一心想着就业，于是暑期开始便一直在北京一家物联网公司实习，时间飞快，有些事情却偏偏以它奇怪的姿势改变我的轨迹，比如：我保研了。&lt;/p&gt;
+
+&lt;p&gt;前段时间把公司一个产品的iOS客户端写好，然后从注册开发者账号开始到最后弄上App Store，至此我也算一个iOS开发菜鸟了，哈哈。上周把MongoDB项目暂时完成了，经理儿子出世回家去了，所以这几天也没有人给我安排工作，在网上瞎逛的时候，突然想起来今年第一天给自己安排的任务，于是花了一上午学习Markdown和Github Page以及jekyll。&lt;/p&gt;
+
+&lt;p&gt;我想在未来的日子里，我应该做点什么了，逝者如斯夫，应该把生活过的像自己想要的那样，才对嘛。&lt;/p&gt;
 
 </description>
-        <pubDate>Mon, 19 Oct 2015 19:38:15 +0800</pubDate>
-        <link>http://yourdomain.com/jekyll/update/2015/10/19/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/jekyll/update/2015/10/19/welcome-to-jekyll.html</guid>
+        <pubDate>Mon, 19 Oct 2015 18:38:15 +0800</pubDate>
+        <link>http://yourdomain.com/jekyll/update/2015/10/19/%E5%8D%9A%E6%96%87%E7%9A%84%E5%BC%80%E5%A7%8B.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/jekyll/update/2015/10/19/%E5%8D%9A%E6%96%87%E7%9A%84%E5%BC%80%E5%A7%8B.html</guid>
         
         
         <category>jekyll</category>
