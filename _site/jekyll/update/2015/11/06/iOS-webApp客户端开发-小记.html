@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>点滴</title>
-  <meta name="description" content="空谈误国-实干兴邦
-">
+  <title>iOS-webApp客户端 开发小记</title>
+  <meta name="description" content="  这篇文章，现在是我写的第二遍，因为就在我刚才准备commit的时候，手贱点了sync，结果白写了一个小时。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://recursion0210.github.io//">
+  <link rel="canonical" href="http://recursion0210.github.io//jekyll/update/2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0.html">
   <link rel="alternate" type="application/rss+xml" title="点滴" href="http://recursion0210.github.io//feed.xml" />
 </head>
 
@@ -55,31 +54,57 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title">iOS-webApp客户端 开发小记</h1>
+    <p class="post-meta">Nov 6, 2015</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Nov 6, 2015</span>
+  <article class="post-content">
+    <blockquote>
+  <p>这篇文章，现在是我写的第二遍，因为就在我刚才准备commit的时候，手贱点了sync，结果白写了一个小时。</p>
+</blockquote>
 
-        <h2>
-          <a class="post-link" href="/jekyll/update/2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0.html">iOS-webApp客户端 开发小记</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Oct 19, 2015</span>
+<p>暑期以来我一直在一家物联网公司实习，刚来的时候开发了一款物联网云服务的iOS客户端，也许你会问为啥一个实习生刚来就开发产品，主要原因是我能力超强，还有一个很小的原因是全公司就我用Mac，并且学过Swift，哈哈。</p>
 
-        <h2>
-          <a class="post-link" href="/jekyll/update/2015/10/19/%E5%8D%9A%E6%96%87%E7%9A%84%E5%BC%80%E5%A7%8B.html">博文的开始</a>
-        </h2>
-      </li>
-    
-  </ul>
+<p>我们公司的云产品都是采用HTML5架构的，这样每个平台的客户端只要套个UIWebView的壳子就好。但是问题不是全部网页都是从服务器端加载的，因为不能保证网络一直畅通，以及服务器没有错，要是网络不通，那整个应用就是一片空白，这样的体验太差了。</p>
 
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+<p>所以我们的想法是欢迎页、登陆页都是本地的资源，这样应用打开，不管服务器啥情况，用户都是可以看见东西的。</p>
+
+<hr />
+
+<h3 id="section">1. 先说说应用逻辑</h3>
+
+<ol>
+  <li>
+    <p>打开应用，首先加载welcome.htm(原本是jsp文件，在Android平台上可以加载，但是Safari不行，所以直接改了后缀)，welcome.htm的js会从sqlite中取出用户名和密码，若不为空，则直接表单提交登录；如为空，则跳转到本地login.htm界面进行登录</p>
+  </li>
+  <li>
+    <p>用户在login.htm进行登录，若登录成功，则其中的js文件会将用户名、密码存入sqlite中</p>
+  </li>
+  <li>
+    <p>应用中有二维码扫描功能，若点击该按钮，则跳转回本地，使用相机进行二维码扫描，然后将结果又返回给网页应用</p>
+  </li>
+  <li>
+    <p>应用中有退出功能，若点击该按钮，则跳转回本地login.htm界面，其中的js会清空sqlite中数据</p>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="section-1">2. 再聊聊遇到的问题以及解决方法</h3>
+
+<ol>
+  <li>Xcode7导入本地资源</li>
+  <li>iOS9网络连接问题</li>
+  <li>UIWebView加载本地资源</li>
+  <li>从网页跳转回本地</li>
+  <li>二维码扫描功能</li>
+</ol>
+
+
+  </article>
 
 </div>
 
