@@ -6,9 +6,99 @@
 </description>
     <link>http://recursion0210.github.io//</link>
     <atom:link href="http://recursion0210.github.io//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 11 Nov 2015 18:05:00 +0800</pubDate>
-    <lastBuildDate>Wed, 11 Nov 2015 18:05:00 +0800</lastBuildDate>
+    <pubDate>Wed, 02 Dec 2015 22:00:28 +0800</pubDate>
+    <lastBuildDate>Wed, 02 Dec 2015 22:00:28 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>阿里百川-即时通讯功能开发</title>
+        <description>&lt;p&gt;在&lt;a href=&quot;../../11/06/iOS-webApp客户端开发-小记.html&quot;&gt;iOS-webApp客户端开发小记&lt;/a&gt; 的最后，我提到我们公司的产品需要在现有产品结构中加入即时通讯功能。&lt;/p&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;项目需求：&lt;/h1&gt;
+
+&lt;p&gt;1.学生与老师之间要能沟通（单聊）&lt;/p&gt;
+
+&lt;p&gt;2.在同一门课程中，老师与学生们在一个聊天群里（群聊）&lt;/p&gt;
+
+&lt;p&gt;3.学生和老师要可以和我们公司的技术支持人员能沟通（客服）&lt;/p&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;技术选型：&lt;/h1&gt;
+&lt;p&gt;前期调研了容联云、LeanCloud、环信、Bmob、阿里百川、友盟等一些做即时通信服务的第三方服务。首先我们需要其提供iOS、Android、h5、Java的SDK，接着试用了他们的Demo，然后看他们的开发文档是否详尽（公司与公司之间的开发文档真的差距好大），最后看他们的技术实力与公司实力（总不能比我们的产品先倒闭吧，哈哈）。&lt;/p&gt;
+
+&lt;p&gt;最后选中了阿里百川，首先其是阿里无线事业部下属的，他们的技术实力和公司实力不用怀疑。其实我第一眼看中的还是他们的开发文档，非常的完善，其次是这个项目应该开始不久，他们的技术支持非常给力，一线的开发人员在充当客服。&lt;/p&gt;
+
+&lt;h1 id=&quot;section-2&quot;&gt;项目开发&lt;/h1&gt;
+&lt;p&gt;未完待续&lt;/p&gt;
+</description>
+        <pubDate>Thu, 03 Dec 2015 04:55:15 +0800</pubDate>
+        <link>http://recursion0210.github.io//jekyll/update/2015/12/03/%E5%8D%B3%E6%97%B6%E9%80%9A%E4%BF%A1%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91.html</link>
+        <guid isPermaLink="true">http://recursion0210.github.io//jekyll/update/2015/12/03/%E5%8D%B3%E6%97%B6%E9%80%9A%E4%BF%A1%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>iOS9-Swift2-Xcode7的APNS使用</title>
+        <description>&lt;p&gt;最近在开发基于阿里百川的即时通信功能，其中对于iOS平台的消息推送是要使用苹果的APNS服务的，对于这个服务不太了解的同学，可以看&lt;a href=&quot;https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html?spm=0.0.0.0.EUOBVe&quot;&gt;apple开发者文档&lt;/a&gt;学习一下。&lt;/p&gt;
+
+&lt;h2 id=&quot;apns&quot;&gt;总结一下使用APNS推送的步骤：&lt;/h2&gt;
+
+&lt;p&gt;1.iOS应用需要向APNS系统申请DeviceToken&lt;/p&gt;
+
+&lt;p&gt;2.应用需要向应用服务器上传DeviceToken&lt;/p&gt;
+
+&lt;p&gt;3.服务器通过DeviceToken向APNS系统推送消息&lt;/p&gt;
+
+&lt;p&gt;4.APNS系统往用户的手机推送消息&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;实现步骤：&lt;/h2&gt;
+
+&lt;h3 id=&quot;devicetoken&quot;&gt;1.申请DeviceToken&lt;/h3&gt;
+&lt;p&gt;在AppDelegate.swift中的application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -&amp;gt; Bool中添加以下函数向系统申请DeviceToken&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound , UIUserNotificationType.Alert , UIUserNotificationType.Badge], categories: nil))
+
+UIApplication.sharedApplication().registerForRemoteNotifications()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;devicetoken-1&quot;&gt;2.获取DeviceToken&lt;/h3&gt;
+&lt;p&gt;在AppDelegate.swift中添加下面这个回调函数，用于获取DeviceToken&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    let token:String = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: &quot;&amp;lt;&amp;gt;&quot;))
+    print(&quot;token==\(token)&quot;)
+    //将token发送到服务器
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用阿里百川的SDK不需要将DeviceToken发送到服务器，IMSDK会自动得到该DeviceToken，你无须手动传给IMSDK&lt;/p&gt;
+
+&lt;h3 id=&quot;apns-1&quot;&gt;3.获取APNS推送证书&lt;/h3&gt;
+
+&lt;p&gt;在iOSAppIDs你的应用里的证书里，点击edit，打开Push Notifications功能，然后会生成两个证书。Production SSL Certificate和Development SSL Certificate。前面是生产环境推送证书，后面是沙箱环境推送证书。将其下载下来，并安装到钥匙串中。&lt;/p&gt;
+
+&lt;p&gt;在钥匙串应用找到这两个证书，右键点击导出，生产p12格式（阿里百川需要p12格式)，在将其上传到阿里百川的控制台。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;4.测试消息推送&lt;/h3&gt;
+&lt;p&gt;使用&lt;a href=&quot;http://pan.baidu.com/s/1ntngmcL&quot;&gt;该工具&lt;/a&gt;,使用你上传的证书，向设备控制台打印出的DeviceToken，发送一条Push，确认是否可以收到Push。&lt;/p&gt;
+
+&lt;p&gt;需要注意的是：项目的证书要和推送证书的类型一致，若是Disturbution证书就得使用Production SSL Certificate，若是Developer证书就得使用Development SSL Certificate。&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 03 Dec 2015 04:55:15 +0800</pubDate>
+        <link>http://recursion0210.github.io//jekyll/update/2015/12/03/iOS9-Swift2-Xcode7-APNS.html</link>
+        <guid isPermaLink="true">http://recursion0210.github.io//jekyll/update/2015/12/03/iOS9-Swift2-Xcode7-APNS.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>iOS-webApp客户端 开发小记</title>
@@ -16,9 +106,13 @@
   &lt;p&gt;这篇文章，现在是我写的第二遍，因为就在我刚才准备commit的时候，手贱点了sync，结果白写了一个小时。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;暑期以来我一直在一家物联网公司实习，刚来的时候开发了一款物联网云服务的iOS客户端，也许你会问为啥一个实习生刚来就开发产品，主要原因是我能力超强，还有一个很小的原因是全公司就我用Mac，并且会点点Swift，哈哈。&lt;/p&gt;
+&lt;p&gt;暑期以来我一直在一家物联网公司实习，刚来的时候开发了一款物联网云服务的iOS客户端，也许你会问为啥
+一个实习生刚来就开发产品，主要原因是我能力超强，还有一个很小的原因是全公司就我用Mac，并且会点点
+Swift，哈哈。&lt;/p&gt;
 
-&lt;p&gt;一开始是开发一款物联网应用的iOS客户端（&lt;a href=&quot;https://itunes.apple.com/us/app/iotcloud/id1045360550?l=zh&amp;amp;ls=1&amp;amp;mt=8&quot;&gt;1.0版本&lt;/a&gt;现在已上线），后期开发了一段时间这个产品的后台，主要是MongoDB和Java Web。之后，我又被叫去开发另一款云教育应用的iOS客户端和Android客户端。这篇文章主要介绍的是开发这两款iOS应用的总结，后期会总结一下在Android上实现同样功能的经验。&lt;/p&gt;
+&lt;p&gt;一开始是开发一款物联网应用的iOS客户端（&lt;a href=&quot;https://itunes.apple.com/us/app/iotcloud/id1045360550?l=zh&amp;amp;ls=1&amp;amp;mt=8&quot;&gt;1.0版本&lt;/a&gt;现在已上线），后期开发了一段时间这个产品的后台，主要是MongoDB和Java Web。之后，我又被叫去开
+发另一款云教育应用的iOS客户端和Android客户端。这篇文章主要介绍的是开发这两款iOS应用的总结，
+后期会总结一下在Android上实现同样功能的经验。&lt;/p&gt;
 
 &lt;p&gt;我们公司的产品都是前端是采用HTML5的，这样每个平台的客户端只要套个UIWebView的壳子就好。但是问题不是全部网页都是从服务器端加载的，因为不能保证网络一直畅通，以及服务器没有错，要是网络不通，那整个应用就是一片空白，这样的体验太差了。&lt;/p&gt;
 
@@ -58,8 +152,8 @@
 
     &lt;p&gt;刚开始用Xcode6开发第一项目的时候，UIWebView联网是没有问题的，第二个项目使用的是Xcode7和iOS9，就连打开baidu都无法实现，控制台会报错：&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; Application Transport Security has blocked a cleartext HTTP (http://) 
- resource load since it is insecure. Temporary exceptions can be configured 
+    &lt;pre&gt;&lt;code&gt; Application Transport Security has blocked a cleartext HTTP (http://)
+ resource load since it is insecure. Temporary exceptions can be configured
  via your app&#39;s Info.plist file.
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -100,15 +194,15 @@
 
     &lt;p&gt;UIWebView中有一个方法，可以在链接地址改变时触发，我就是利用该方法，判断UIWebView即将要跳转的链接地址，如果是事先确定的，则执行本地相关操作，如上所述的二维码操作：&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, 
+    &lt;pre&gt;&lt;code&gt; func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest,
  navigationType: UIWebViewNavigationType) -&amp;gt; Bool  {
  	let rurl = request.URL
  	if(rurl!.scheme == &quot;m&quot; &amp;amp;&amp;amp; rurl!.host == &quot;erweima.com&quot;)
  	{//启动二维码扫描
  		tiaozhuan()
   	}
- 	//返回true就会跳转新地址 
- }	
+ 	//返回true就会跳转新地址
+ }
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -119,7 +213,7 @@
     &lt;pre&gt;&lt;code&gt;  func tiaozhuan() {
  let scannerVC:ScannerViewController = ScannerViewController()
  scannerVC.delegate = self
-    
+
  self.presentViewController(scannerVC, animated: false, completion: nil)  }
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -164,7 +258,6 @@
     &lt;p&gt;解决思路：我想到的方法是集成第三方的服务，目前用的是&lt;a href=&quot;http://www.yuntongxun.com/&quot;&gt;容联云服务&lt;/a&gt;。还没做完，未完待续。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
-
 </description>
         <pubDate>Fri, 06 Nov 2015 01:00:15 +0800</pubDate>
         <link>http://recursion0210.github.io//jekyll/update/2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0.html</link>

@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>点滴</title>
-  <meta name="description" content="空谈误国-实干兴邦
-">
+  <title>iOS9-Swift2-Xcode7的APNS使用</title>
+  <meta name="description" content="最近在开发基于阿里百川的即时通信功能，其中对于iOS平台的消息推送是要使用苹果的APNS服务的，对于这个服务不太了解的同学，可以看apple开发者文档学习一下。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://recursion0210.github.io//">
+  <link rel="canonical" href="http://recursion0210.github.io//jekyll/update/2015/12/03/iOS9-Swift2-Xcode7-APNS.html">
   <link rel="alternate" type="application/rss+xml" title="点滴" href="http://recursion0210.github.io//feed.xml" />
 </head>
 
@@ -55,47 +54,61 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title">iOS9-Swift2-Xcode7的APNS使用</h1>
+    <p class="post-meta">Dec 3, 2015</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Dec 3, 2015</span>
+  <article class="post-content">
+    <p>最近在开发基于阿里百川的即时通信功能，其中对于iOS平台的消息推送是要使用苹果的APNS服务的，对于这个服务不太了解的同学，可以看<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html?spm=0.0.0.0.EUOBVe">apple开发者文档</a>学习一下。</p>
 
-        <h2>
-          <a class="post-link" href="/jekyll/update/2015/12/03/%E5%8D%B3%E6%97%B6%E9%80%9A%E4%BF%A1%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91.html">阿里百川-即时通讯功能开发</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Dec 3, 2015</span>
+<h2 id="apns">总结一下使用APNS推送的步骤：</h2>
 
-        <h2>
-          <a class="post-link" href="/jekyll/update/2015/12/03/iOS9-Swift2-Xcode7-APNS.html">iOS9-Swift2-Xcode7的APNS使用</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Nov 6, 2015</span>
+<p>1.iOS应用需要向APNS系统申请DeviceToken</p>
 
-        <h2>
-          <a class="post-link" href="/jekyll/update/2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0.html">iOS-webApp客户端 开发小记</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Oct 19, 2015</span>
+<p>2.应用需要向应用服务器上传DeviceToken</p>
 
-        <h2>
-          <a class="post-link" href="/jekyll/update/2015/10/19/%E5%8D%9A%E6%96%87%E7%9A%84%E5%BC%80%E5%A7%8B.html">博文的开始</a>
-        </h2>
-      </li>
-    
-  </ul>
+<p>3.服务器通过DeviceToken向APNS系统推送消息</p>
 
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+<p>4.APNS系统往用户的手机推送消息</p>
+
+<h2 id="section">实现步骤：</h2>
+
+<h3 id="devicetoken">1.申请DeviceToken</h3>
+<p>在AppDelegate.swift中的application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -&gt; Bool中添加以下函数向系统申请DeviceToken</p>
+
+<pre><code>UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound , UIUserNotificationType.Alert , UIUserNotificationType.Badge], categories: nil))
+
+UIApplication.sharedApplication().registerForRemoteNotifications()
+</code></pre>
+
+<h3 id="devicetoken-1">2.获取DeviceToken</h3>
+<p>在AppDelegate.swift中添加下面这个回调函数，用于获取DeviceToken</p>
+
+<pre><code>func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    let token:String = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "&lt;&gt;"))
+    print("token==\(token)")
+    //将token发送到服务器
+}
+</code></pre>
+
+<p>使用阿里百川的SDK不需要将DeviceToken发送到服务器，IMSDK会自动得到该DeviceToken，你无须手动传给IMSDK</p>
+
+<h3 id="apns-1">3.获取APNS推送证书</h3>
+
+<p>在iOSAppIDs你的应用里的证书里，点击edit，打开Push Notifications功能，然后会生成两个证书。Production SSL Certificate和Development SSL Certificate。前面是生产环境推送证书，后面是沙箱环境推送证书。将其下载下来，并安装到钥匙串中。</p>
+
+<p>在钥匙串应用找到这两个证书，右键点击导出，生产p12格式（阿里百川需要p12格式)，在将其上传到阿里百川的控制台。</p>
+
+<h3 id="section-1">4.测试消息推送</h3>
+<p>使用<a href="http://pan.baidu.com/s/1ntngmcL">该工具</a>,使用你上传的证书，向设备控制台打印出的DeviceToken，发送一条Push，确认是否可以收到Push。</p>
+
+<p>需要注意的是：项目的证书要和推送证书的类型一致，若是Disturbution证书就得使用Production SSL Certificate，若是Developer证书就得使用Development SSL Certificate。</p>
+
+
+  </article>
 
 </div>
 
