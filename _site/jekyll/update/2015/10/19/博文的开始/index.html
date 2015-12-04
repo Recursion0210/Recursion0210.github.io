@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="与世界分享我的知识、经验和见解">
+    <meta name="keyword"  content="recursion 黄帅的博客">
+    <link rel="shortcut icon" href="../img/common/favicon.ico">
+
+	<link href="../css/prism.css" rel="stylesheet" />
+	<script src="../js/prism.js"></script>
+
+    <title>博文的开始 - 黄帅的博客|huangshuai's Blog</title>
+
+    <link rel="canonical" href="http://recursion0210.github.io//jekyll/update/2015/10/19/%E5%8D%9A%E6%96%87%E7%9A%84%E5%BC%80%E5%A7%8B/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">recursion’s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/common/home-bg.jpg" width="0" height="0"> -->
+
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/common/home-bg.jpg')
+    }
+
+	/*导航*/
+	.BlogAnchor {
+	    background: #ffffff;
+	    padding: 0px;
+	    line-height: 180%;
+	}
+	.BlogAnchor p {
+	    font-size: 18px;
+	    color: #15a230;
+	    margin-bottom: 0.3em;
+	}
+	.BlogAnchor .AnchorContent {
+	    padding: 5px 0px;
+	}
+	.BlogAnchor li{
+	    text-indent: 20px;
+	    font-size: 18px;
+	}
+	#AnchorContentToggle {
+	    font-size: 18px;
+	    font-weight: normal;
+	    color: #FFF;
+	    display: inline-block;
+	    line-height: 30px;
+	    background: #5cc26f;
+	    font-style: normal;
+	    padding: 1px 20px;
+	    margin-right: 10px;
+	}
+	.BlogAnchor a:hover {
+	    color: #5cc26f;
+	}
+	.BlogAnchor a {
+	    text-decoration: none;
+	}
+
+
+	.ScrollTop {
+		width: 50px;
+		height: 50px;
+		background: black;
+		-moz-border-radius: 25px;
+		-webkit-border-radius: 25px;
+		border-radius: 25px;
+		position:fixed;
+		    bottom:18px;
+		    right:30px;
+			-webkit-box-shadow: #666 0px 0px 5px;
+			   -moz-box-shadow: #666 0px 0px 5px;
+			   box-shadow: #666 0px 0px 5px;
+	}
+	.ScrollTop p {
+	    font-size: 15px;
+	    color: #ffffff;
+		position:fixed;
+		    bottom:0px;
+		    right:40px;
+	}
+
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>博文的开始</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by recursion’s Blog on October 19, 2015</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+
+<div class="BlogAnchor">
+    <p>
+        <b id="AnchorContentToggle" title="收起" style="cursor:pointer;">目录[+]</b>
+    </p>
+    <div class="AnchorContent" id="AnchorContent"> </div>
+</div>
+
+<div class="ScrollTop">
+    <p>
+        <b id="ScrollTopToggle" title="顶部" style="cursor:pointer;">Top</b>
+    </p>
+</div>
+				<p>起这个题目，是向我一个学长<a href="http://blog.csdn.net/decting/article/details/8062457">致敬</a>。</p>
+
+<p>今天是2015年元旦，照这样说来就算是去年，我认识了这个学长。当初是请教学长安卓问题，然后由于时间问题直接到学长寝室请他帮忙调程序。说真的，看着高手调程序真的能学到太多，他们解决问题的思路和方法真的很值得我们去学习，我记得当时学会了用Log.i(“”,”“)来跟踪程序运行状况。</p>
+
+<p>进入大学三年了，期间从网上学习了很多东西，一直以来我只是有一个互联网内容消费者，没有创造过什么。CSDN的账号创建很久了，每次看到技术牛人写的关于各类问题的解决方法以及他们自身对于问题的思考，就非常的崇拜以及感谢他们的付出。经常在看完他们的技术博客之后，在想自己是不是也能写一点什么，就像知乎说的那样，与世界分享你的知识和见解，然而一拖就拖到现在。其实，原来也真的什么都不会，没得内容来与大家分享。渐渐的我也做了一些项目，成为了学弟们的学长，我想我也应该把自己遇到问题的一些解决方法和对这些方法的思考写出来，而不是只记录在我自己的OneNote里面。</p>
+
+<p>我是物联网专业学生，所开发的一些也都是软硬件结合的项目，我会在此与大家分享经验。</p>
+
+<p>好了，那这第一篇文章就作为我新阶段的开始，2015年我会准备考研，因此会对相关的科目进行复习与总结，我也会在此记录我考研路上对于专业相关问题的感悟。<br />
+   最后，从学长那抄一句：</p>
+
+<blockquote>
+  <p>我们的目标是没有遗憾。</p>
+</blockquote>
+
+<hr />
+
+<p>以上是我在2015年1月1日在CSDN上写的第一篇博文，</p>
+
+<p>当时已值大三，开博的目的是可以分享一些项目经验以及记录一下考研备战路上的点点滴滴。可惜当时准备考研，后期在写过一篇《Android-Lint使用后的错误解决》之后便停滞项目开发了，后来到了五月份，我放弃了考研，一心想着就业，于是暑期开始便一直在北京一家物联网公司实习，时间飞快，有些事情却偏偏以它奇怪的姿势改变我的轨迹，比如：我保研了。</p>
+
+<p>前段时间把公司一个产品的iOS客户端写好，然后从注册开发者账号开始到最后弄上App Store，至此我也算一个iOS开发菜鸟了，哈哈。上周把MongoDB项目暂时完成了，经理儿子出世回家去了，所以这几天也没有人给我安排工作，在网上瞎逛的时候，突然想起来今年第一天给自己安排的任务，于是花了一上午学习Markdown和Github Page以及jekyll。</p>
+
+<p>我想在未来的日子里，我应该做点什么了，逝者如斯夫，应该把生活过的像自己想要的那样，才对嘛。</p>
+
+
+
+<!--协议说明 -->
+				<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+				<center>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">文章</span>由<span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">黄帅</span>创作，采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可。</center>
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                </style>
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="/jekyll/update/2015/10/19/博文的开始"
+                    data-title="博文的开始"
+                    data-url="http://recursion0210.github.io//jekyll/update/2015/10/19/%E5%8D%9A%E6%96%87%E7%9A%84%E5%BC%80%E5%A7%8B/"
+                    data-images="http://recursion0210.github.io//img/common/home-bg.jpg"
+                    data-content="起这个题目，是向我一个学长致敬。
+
+今天是2015年元旦，照这样说来就算是去年，我认识了这个学长。当初是请教学长安卓问题，然后由于时间问题直接到学长寝室请... | 黄帅的博客|huangshuai's Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/jekyll/update/2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0/" data-toggle="tooltip" data-placement="top" title="iOS-webApp客户端 开发小记">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/jekyll/update/2015/10/19/博文的开始"
+                        data-title="博文的开始"
+                        data-url="http://recursion0210.github.io//jekyll/update/2015/10/19/%E5%8D%9A%E6%96%87%E7%9A%84%E5%BC%80%E5%A7%8B/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+            </div>
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
+ <script src="http://daiweilai.github.io/js/lightbox-plus-jquery.min.js"></script>
+ <link rel="stylesheet" href="http://daiweilai.github.io/css/lightbox.css">
+<script>
+$(".container").find("h2,h3,h4,h5,h6").each(function(i,item){
+    var tag = $(item).get(0).localName;
+    $(item).attr("id","wow"+i);
+    $("#AnchorContent").append('<li><a class="new'+tag+' anchor-link" onclick="return false;" href="#" link="#wow'+i+'">'+$(this).text()+'</a></li>');
+    $(".newh2").css("margin-left",0);
+    $(".newh3").css("margin-left",20);
+    $(".newh4").css("margin-left",40);
+    $(".newh5").css("margin-left",60);
+    $(".newh6").css("margin-left",80);
+});
+$("#AnchorContent").toggle();
+$("#AnchorContentToggle").click(function(){
+    var text = $(this).html();
+    if(text=="目录[-]"){
+        $(this).html("目录[+]");
+        $(this).attr({"title":"展开"});
+    }else{
+        $(this).html("目录[-]");
+        $(this).attr({"title":"收起"});
+    }
+    $("#AnchorContent").toggle();
+});
+
+$(".anchor-link").click(function(){
+    $("html,body").animate({scrollTop: $($(this).attr("link")).offset().top}, 1000);
+});
+
+$('.ScrollTop').click(function(){$('html,body').animate({scrollTop: '0px'}, 800);});
+//给图片添加点击放大事件
+$(".container").find("img").each(function(i,item){
+    var tag = $(item).get(0);
+	tag.parentNode.innerHTML = "<div>" + "<a href="+tag.src+' data-lightbox="aaa"'+ " >"+ "<img src=" + tag.src + " />" +"</a>" + "</div>"
+
+});
+</script>
+
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = '黄帅';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: ''
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a target="_blank" href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/recursion0210">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; recursion’s Blog 2015
+                    <br>
+                    Star my <a href="https://github.com/recursion0210" target="_blank">blog</a>
+					<iframe
+					                        style="margin-left: 2px; margin-bottom:-5px;"
+					                        frameborder="0" scrolling="0" width="91px" height="20px"
+					                        src="https://ghbtns.com/github-btn.html?user=recursion0210&repo=recursion0210.github.io&type=star&count=true" >
+					                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- Highlight.js -->
+<script>
+    // async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+//         hljs.initHighlightingOnLoad();
+//     })
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/common/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

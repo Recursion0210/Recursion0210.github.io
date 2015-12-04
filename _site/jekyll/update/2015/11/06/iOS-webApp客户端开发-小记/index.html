@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="与世界分享我的知识、经验和见解">
+    <meta name="keyword"  content="recursion 黄帅的博客">
+    <link rel="shortcut icon" href="../img/common/favicon.ico">
+
+	<link href="../css/prism.css" rel="stylesheet" />
+	<script src="../js/prism.js"></script>
+
+    <title>iOS-webApp客户端 开发小记 - 黄帅的博客|huangshuai's Blog</title>
+
+    <link rel="canonical" href="http://recursion0210.github.io//jekyll/update/2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">recursion’s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/common/home-bg.jpg" width="0" height="0"> -->
+
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/common/home-bg.jpg')
+    }
+
+	/*导航*/
+	.BlogAnchor {
+	    background: #ffffff;
+	    padding: 0px;
+	    line-height: 180%;
+	}
+	.BlogAnchor p {
+	    font-size: 18px;
+	    color: #15a230;
+	    margin-bottom: 0.3em;
+	}
+	.BlogAnchor .AnchorContent {
+	    padding: 5px 0px;
+	}
+	.BlogAnchor li{
+	    text-indent: 20px;
+	    font-size: 18px;
+	}
+	#AnchorContentToggle {
+	    font-size: 18px;
+	    font-weight: normal;
+	    color: #FFF;
+	    display: inline-block;
+	    line-height: 30px;
+	    background: #5cc26f;
+	    font-style: normal;
+	    padding: 1px 20px;
+	    margin-right: 10px;
+	}
+	.BlogAnchor a:hover {
+	    color: #5cc26f;
+	}
+	.BlogAnchor a {
+	    text-decoration: none;
+	}
+
+
+	.ScrollTop {
+		width: 50px;
+		height: 50px;
+		background: black;
+		-moz-border-radius: 25px;
+		-webkit-border-radius: 25px;
+		border-radius: 25px;
+		position:fixed;
+		    bottom:18px;
+		    right:30px;
+			-webkit-box-shadow: #666 0px 0px 5px;
+			   -moz-box-shadow: #666 0px 0px 5px;
+			   box-shadow: #666 0px 0px 5px;
+	}
+	.ScrollTop p {
+	    font-size: 15px;
+	    color: #ffffff;
+		position:fixed;
+		    bottom:0px;
+		    right:40px;
+	}
+
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>iOS-webApp客户端 开发小记</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by recursion’s Blog on November 6, 2015</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+
+<div class="BlogAnchor">
+    <p>
+        <b id="AnchorContentToggle" title="收起" style="cursor:pointer;">目录[+]</b>
+    </p>
+    <div class="AnchorContent" id="AnchorContent"> </div>
+</div>
+
+<div class="ScrollTop">
+    <p>
+        <b id="ScrollTopToggle" title="顶部" style="cursor:pointer;">Top</b>
+    </p>
+</div>
+				<blockquote>
+  <p>这篇文章，现在是我写的第二遍，因为就在我刚才准备commit的时候，手贱点了sync，结果白写了一个小时。</p>
+</blockquote>
+
+<p>暑期以来我一直在一家物联网公司实习，刚来的时候开发了一款物联网云服务的iOS客户端，也许你会问为啥<br />
+一个实习生刚来就开发产品，主要原因是我能力超强，还有一个很小的原因是全公司就我用Mac，并且会点点<br />
+Swift，哈哈。</p>
+
+<p>一开始是开发一款物联网应用的iOS客户端（<a href="https://itunes.apple.com/us/app/iotcloud/id1045360550?l=zh&amp;ls=1&amp;mt=8">1.0版本</a>现在已上线），后期开发了一段时间这个产品的后台，主要是MongoDB和Java Web。之后，我又被叫去开<br />
+发另一款云教育应用的iOS客户端和Android客户端。这篇文章主要介绍的是开发这两款iOS应用的总结，<br />
+后期会总结一下在Android上实现同样功能的经验。</p>
+
+<p>我们公司的产品都是前端是采用HTML5的，这样每个平台的客户端只要套个UIWebView的壳子就好。但是问题不是全部网页都是从服务器端加载的，因为不能保证网络一直畅通，以及服务器没有错，要是网络不通，那整个应用就是一片空白，这样的体验太差了。</p>
+
+<p>所以我们的想法是欢迎页、登陆页都是本地的资源，这样应用打开，不管服务器啥情况，用户都是可以看见东西的。</p>
+
+<hr />
+
+<p>###1. 先说说应用逻辑</p>
+
+<ol>
+  <li>
+    <p>打开应用，首先加载welcome.htm(原本是jsp文件，在Android平台上可以加载，但是Safari不行，所以直接改了后缀)，welcome.htm的js会从sqlite中取出用户名和密码，若不为空，则直接表单提交登录；如为空，则跳转到本地login.htm界面进行登录</p>
+  </li>
+  <li>
+    <p>用户在login.htm进行登录，若登录成功，则其中的js文件会将用户名、密码存入sqlite中</p>
+  </li>
+  <li>
+    <p>应用中有二维码扫描功能，若点击该按钮，则跳转回本地，使用相机进行二维码扫描，然后将结果又返回给网页应用</p>
+  </li>
+  <li>
+    <p>应用中有退出功能，若点击该按钮，则跳转回本地login.htm界面，其中的js会清空sqlite中数据</p>
+  </li>
+</ol>
+
+<hr />
+
+<p>###2. 再聊聊遇到的问题以及解决方法</p>
+
+<ol>
+  <li>
+    <p>Xcode7导入本地资源</p>
+
+    <p>之前用的是Xcode6，项目下面有一个Supporting Files文件夹，将本地资源导入后都在此文件夹中，升级到Xcode7后，没有这个文件夹了，可以直接将本地资源直接导入项目中。</p>
+  </li>
+  <li>
+    <p>iOS9网络连接问题</p>
+
+    <p>刚开始用Xcode6开发第一项目的时候，UIWebView联网是没有问题的，第二个项目使用的是Xcode7和iOS9，就连打开baidu都无法实现，控制台会报错：</p>
+
+    <pre><code> Application Transport Security has blocked a cleartext HTTP (http://)
+ resource load since it is insecure. Temporary exceptions can be configured
+ via your app's Info.plist file.
+</code></pre>
+
+    <p>当时在Stack Overflow找到原因了：</p>
+
+    <pre><code> 在iOS9 beta1中，苹果将原http协议改成了https协议，使用 TLS1.2 SSL加密请求数据。
+</code></pre>
+
+    <p>解决方法就是：</p>
+
+    <pre><code> 在info.plist中添加
+ &lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+ &lt;dict&gt;&lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;&lt;true/&gt;&lt;/dict&gt;
+</code></pre>
+
+    <p>后来在<a href="http://www.infoq.com/cn/articles/wechat-ios9-adaptation">《微信在适配iOS9上遇到的问题和解决方案》</a>也看到了该问题的解决方法。</p>
+  </li>
+  <li>
+    <p>UIWebView加载本地资源</p>
+
+    <p>我做的项目中，主要是UIWebView加载本地的网页，代码如下：</p>
+
+    <pre><code> let path = NSBundle.mainBundle().pathForResource("index", ofType: "htm")
+ let urlobj = NSURL.fileURLWithPath(path!)
+ let request = NSURLRequest(URL: urlobj)
+ myWebView.loadRequest(request)
+</code></pre>
+  </li>
+  <li>
+    <p>从网页跳转回本地</p>
+
+    <p>前面说到项目的两个功能：一是网页调用本地二维码；二是在网页里退出，本地能清除登录数据。</p>
+
+    <p>我的解决思路是：web应用中，需要跳转本地的功能，都把链接写成固定格式的</p>
+
+    <pre><code> &lt;a href="m://erweima.com/" class="link_btn link_btn_t"&gt;二维码扫描&lt;/a&gt;
+</code></pre>
+
+    <p>UIWebView中有一个方法，可以在链接地址改变时触发，我就是利用该方法，判断UIWebView即将要跳转的链接地址，如果是事先确定的，则执行本地相关操作，如上所述的二维码操作：</p>
+
+    <pre><code> func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest,
+ navigationType: UIWebViewNavigationType) -&gt; Bool  {
+ 	let rurl = request.URL
+ 	if(rurl!.scheme == "m" &amp;&amp; rurl!.host == "erweima.com")
+ 	{//启动二维码扫描
+ 		tiaozhuan()
+  	}
+ 	//返回true就会跳转新地址
+ }
+</code></pre>
+  </li>
+  <li>
+    <p>二维码扫描功能</p>
+
+    <p>这里用到一个用Swift2和AVFoundation写的二维码扫描的类<a href="https://github.com/Recursion0210/QRCode">github</a>，类里用的是UIStoryBoard进行跳转的，我稍微改动了一下，用方法调用的：</p>
+
+    <pre><code>  func tiaozhuan() {
+ let scannerVC:ScannerViewController = ScannerViewController()
+ scannerVC.delegate = self
+
+ self.presentViewController(scannerVC, animated: false, completion: nil)  }
+</code></pre>
+
+    <p>ViewController继承了ScannerViewControllerDelegate协议，实现了：</p>
+
+    <pre><code> func barcodeObtained(viewController: ScannerViewController, data: String) {
+ //打印二维码扫描的结果
+ print(data)        
+ }
+</code></pre>
+  </li>
+</ol>
+
+<hr />
+<p>项目本来已经做完了，经理又加了一些功能，因此又来补充了。</p>
+
+<p>今天周三，是光棍节，周一做的是Android和iOS的判断网络状态的功能，周二和今天上午做的是Android的即时通讯和实时音视频功能，今天下午做的是iOS的即时通讯功能，由于SDK用的是OC，而我用的是Swift，所以到现在也没搞出来啥，还好项目不急，所以来更新一下博客。</p>
+
+<p>2015-11-11 17:55</p>
+
+<hr />
+
+<ol>
+  <li>
+    <p>判断网络状态</p>
+
+    <p>问题：是这样的，由于产品登陆完之后，全部内容都在UIWebView中，要是网络突然断了，就会显示无法连接界面，这样用户体验不好，如果后面能联网了，又不能返回到断网之前的界面。</p>
+
+    <p>需求：在尽量不改后台的情况下，解决上面的问题</p>
+
+    <p>解决思路：在每次需要跳转之前，先判断一下网络状态，若是可以联网则不处理；若不能联网，则存储当前链接，并跳转到本地一个不能联网的界面，该界面上有刷新按钮，通过不断点击刷新按钮来重复跳转该界面，然后可以判断网络情况，若可以联网了，则加载之前存储的链接。</p>
+
+    <p>上面的逻辑代码就不贴了，没有参考意义，反正就是在上面第四点的webView方法中进行处理。这里我放一个判断网络状态的项目地址<a href="https://github.com/ashleymills/Reachability.swift">Reachability.swift-github</a></p>
+  </li>
+  <li>
+    <p>即时通讯</p>
+
+    <p>问题：由于我们的项目是做教育类的，需要用户之间可以进行类似于微信那样的通信功能，并且可以进行实时音、视频通话功能。</p>
+
+    <p>需求：实现上述功能，还要尽可能的保证服务质量</p>
+
+    <p>解决思路：我想到的方法是集成第三方的服务，目前用的是<a href="http://www.yuntongxun.com/">容联云服务</a>。还没做完，未完待续。</p>
+  </li>
+</ol>
+
+
+<!--协议说明 -->
+				<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+				<center>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">文章</span>由<span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">黄帅</span>创作，采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可。</center>
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                </style>
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="/jekyll/update/2015/11/06/iOS-webApp客户端开发-小记"
+                    data-title="iOS-webApp客户端 开发小记"
+                    data-url="http://recursion0210.github.io//jekyll/update/2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0/"
+                    data-images="http://recursion0210.github.io//img/common/home-bg.jpg"
+                    data-content="
+  这篇文章，现在是我写的第二遍，因为就在我刚才准备commit的时候，手贱点了sync，结果白写了一个小时。
+
+
+暑期以来我一直在一家物联网公司实习，... | 黄帅的博客|huangshuai's Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/jekyll/update/2015/10/19/%E5%8D%9A%E6%96%87%E7%9A%84%E5%BC%80%E5%A7%8B/" data-toggle="tooltip" data-placement="top" title="博文的开始">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/jekyll/update/2015/12/03/iOS9-Swift2-Xcode7-APNS/" data-toggle="tooltip" data-placement="top" title="iOS9-Swift2-Xcode7的APNS使用">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="/jekyll/update/2015/11/06/iOS-webApp客户端开发-小记"
+                        data-title="iOS-webApp客户端 开发小记"
+                        data-url="http://recursion0210.github.io//jekyll/update/2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+            </div>
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
+ <script src="http://daiweilai.github.io/js/lightbox-plus-jquery.min.js"></script>
+ <link rel="stylesheet" href="http://daiweilai.github.io/css/lightbox.css">
+<script>
+$(".container").find("h2,h3,h4,h5,h6").each(function(i,item){
+    var tag = $(item).get(0).localName;
+    $(item).attr("id","wow"+i);
+    $("#AnchorContent").append('<li><a class="new'+tag+' anchor-link" onclick="return false;" href="#" link="#wow'+i+'">'+$(this).text()+'</a></li>');
+    $(".newh2").css("margin-left",0);
+    $(".newh3").css("margin-left",20);
+    $(".newh4").css("margin-left",40);
+    $(".newh5").css("margin-left",60);
+    $(".newh6").css("margin-left",80);
+});
+$("#AnchorContent").toggle();
+$("#AnchorContentToggle").click(function(){
+    var text = $(this).html();
+    if(text=="目录[-]"){
+        $(this).html("目录[+]");
+        $(this).attr({"title":"展开"});
+    }else{
+        $(this).html("目录[-]");
+        $(this).attr({"title":"收起"});
+    }
+    $("#AnchorContent").toggle();
+});
+
+$(".anchor-link").click(function(){
+    $("html,body").animate({scrollTop: $($(this).attr("link")).offset().top}, 1000);
+});
+
+$('.ScrollTop').click(function(){$('html,body').animate({scrollTop: '0px'}, 800);});
+//给图片添加点击放大事件
+$(".container").find("img").each(function(i,item){
+    var tag = $(item).get(0);
+	tag.parentNode.innerHTML = "<div>" + "<a href="+tag.src+' data-lightbox="aaa"'+ " >"+ "<img src=" + tag.src + " />" +"</a>" + "</div>"
+
+});
+</script>
+
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = '黄帅';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: ''
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a target="_blank" href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/recursion0210">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; recursion’s Blog 2015
+                    <br>
+                    Star my <a href="https://github.com/recursion0210" target="_blank">blog</a>
+					<iframe
+					                        style="margin-left: 2px; margin-bottom:-5px;"
+					                        frameborder="0" scrolling="0" width="91px" height="20px"
+					                        src="https://ghbtns.com/github-btn.html?user=recursion0210&repo=recursion0210.github.io&type=star&count=true" >
+					                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- Highlight.js -->
+<script>
+    // async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+//         hljs.initHighlightingOnLoad();
+//     })
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/common/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

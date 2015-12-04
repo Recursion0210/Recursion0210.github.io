@@ -1,12 +1,81 @@
 # Site settings
-title: 点滴
-email: recursion0210@foxmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  空谈误国-实干兴邦
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://recursion0210.github.io/" # the base hostname & protocol for your site
-twitter_username: recursion210
-github_username:  Recursion0210
+title: recursion’s Blog
+SEOTitle: 黄帅的博客|huangshuai's Blog
+header-img: img/common/home-bg.jpg
+email: daiweilai@foxmail.com
+description: "与世界分享我的知识、经验和见解"
+keyword: "recursion 黄帅的博客"
+url: "http://recursion0210.github.io/"              # your host, for absolute URL
+baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
+
+
+
+# SNS settings
+RSS: true
+weibo_username:     2189929640
+#zhihu_username:     daiweilai
+github_username:    recursion0210
+#twitter_username:  daiweilai
+#facebook_username:  daiweilai
+
+
 
 # Build settings
+gems: [jekyll-paginate]
+#highlighter: pygments
+permalink: pretty
+paginate: 10
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+
+
+
+# Markdown settings
+# replace redcarpet to kramdown,
+# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
+# document: http://jekyllrb.com/docs/configuration/#kramdown
 markdown: kramdown
+kramdown:
+  input: GFM                            # use Github Flavored Markdown !important
+
+
+
+# Duoshuo settings
+duoshuo_username: 黄帅 # Share component is depend on Comment so we can NOT use share only.
+duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+
+
+
+
+# Analytics settings
+# Baidu Analytics
+#ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
+# Google Analytics
+#ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+#ga_domain: huangxuan.me
+
+
+
+# Sidebar settings
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "正在努力学习，成为IOT的Full Stack Engineer"
+sidebar-avatar: ../img/common/avatar.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+
+
+
+# Featured Tags
+featured-tags: true                     # whether or not using Feature-Tags
+featured-condition-size: 0             # A tag will be featured if the size of it is more than this condition value
+
+
+
+# Friends
+#friends: [
+#    {
+#        title: "",
+#        href: ""
+#    },{
+#        title: "",
+#        href: ""
+#    }
+#]
