@@ -5,8 +5,8 @@
     <description>与世界分享我的知识、经验和见解</description>
     <link>http://recursion0210.github.io//</link>
     <atom:link href="http://recursion0210.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 04 Dec 2015 16:36:49 +0800</pubDate>
-    <lastBuildDate>Fri, 04 Dec 2015 16:36:49 +0800</lastBuildDate>
+    <pubDate>Fri, 04 Dec 2015 22:21:06 +0800</pubDate>
+    <lastBuildDate>Fri, 04 Dec 2015 22:21:06 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -42,7 +42,11 @@
     
       <item>
         <title>iOS9-Swift2-Xcode7的APNS使用</title>
-        <description>&lt;p&gt;最近在开发基于阿里百川的即时通信功能，其中对于iOS平台的消息推送是要使用苹果的APNS服务的，对于这个服务不太了解的同学，可以看&lt;a href=&quot;https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html?spm=0.0.0.0.EUOBVe&quot;&gt;apple开发者文档&lt;/a&gt;学习一下。&lt;/p&gt;
+        <description>&lt;h1 id=&quot;ios9-swift2-xcode7apns&quot;&gt;iOS9-Swift2-Xcode7的APNS使用&lt;/h1&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;最近在开发基于阿里百川的即时通信功能，其中对于iOS平台的消息推送是要使用苹果的APNS服务的，对于这个服务不太了解的同学，可以看&lt;a href=&quot;https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html?spm=0.0.0.0.EUOBVe&quot;&gt;apple开发者文档&lt;/a&gt;学习一下。&lt;/p&gt;
 
 &lt;h2 id=&quot;apns&quot;&gt;总结一下使用APNS推送的步骤：&lt;/h2&gt;
 
@@ -54,7 +58,7 @@
 
 &lt;p&gt;4.APNS系统往用户的手机推送消息&lt;/p&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;实现步骤：&lt;/h2&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;实现步骤：&lt;/h2&gt;
 
 &lt;h3 id=&quot;devicetoken&quot;&gt;1.申请DeviceToken&lt;/h3&gt;
 &lt;p&gt;在AppDelegate.swift中的application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -&amp;gt; Bool中添加以下函数向系统申请DeviceToken&lt;/p&gt;
@@ -67,12 +71,13 @@ UIApplication.sharedApplication().registerForRemoteNotifications()
 &lt;h3 id=&quot;devicetoken-1&quot;&gt;2.获取DeviceToken&lt;/h3&gt;
 &lt;p&gt;在AppDelegate.swift中添加下面这个回调函数，用于获取DeviceToken&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-    let token:String = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: &quot;&amp;lt;&amp;gt;&quot;))
-    print(&quot;token==\(token)&quot;)
-    //将token发送到服务器
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;
+	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let token:String = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: &quot;&amp;lt;&amp;gt;&quot;))
+        print(&quot;token==\(token)&quot;)
+        //将token发送到服务器
+    }
+   &lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;使用阿里百川的SDK不需要将DeviceToken发送到服务器，IMSDK会自动得到该DeviceToken，你无须手动传给IMSDK&lt;/p&gt;
 
@@ -82,20 +87,18 @@ UIApplication.sharedApplication().registerForRemoteNotifications()
 
 &lt;p&gt;在钥匙串应用找到这两个证书，右键点击导出，生产p12格式（阿里百川需要p12格式)，在将其上传到阿里百川的控制台。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;4.测试消息推送&lt;/h3&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;4.测试消息推送&lt;/h3&gt;
 &lt;p&gt;使用&lt;a href=&quot;http://pan.baidu.com/s/1ntngmcL&quot;&gt;该工具&lt;/a&gt;,使用你上传的证书，向设备控制台打印出的DeviceToken，发送一条Push，确认是否可以收到Push。&lt;/p&gt;
 
 &lt;p&gt;需要注意的是：项目的证书要和推送证书的类型一致，若是Disturbution证书就得使用Production SSL Certificate，若是Developer证书就得使用Development SSL Certificate。&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 03 Dec 2015 04:55:15 +0800</pubDate>
-        <link>http://recursion0210.github.io//jekyll/update/2015/12/03/iOS9-Swift2-Xcode7-APNS/</link>
-        <guid isPermaLink="true">http://recursion0210.github.io//jekyll/update/2015/12/03/iOS9-Swift2-Xcode7-APNS/</guid>
+        <link>http://recursion0210.github.io//2015/12/03/iOS9-Swift2-Xcode7-APNS/</link>
+        <guid isPermaLink="true">http://recursion0210.github.io//2015/12/03/iOS9-Swift2-Xcode7-APNS/</guid>
         
+        <category>拾遗集</category>
         
-        <category>jekyll</category>
-        
-        <category>update</category>
         
       </item>
     
@@ -300,6 +303,8 @@ Swift，哈哈。&lt;/p&gt;
         <pubDate>Mon, 19 Oct 2015 18:38:15 +0800</pubDate>
         <link>http://recursion0210.github.io//jekyll/update/2015/10/19/%E5%8D%9A%E6%96%87%E7%9A%84%E5%BC%80%E5%A7%8B/</link>
         <guid isPermaLink="true">http://recursion0210.github.io//jekyll/update/2015/10/19/%E5%8D%9A%E6%96%87%E7%9A%84%E5%BC%80%E5%A7%8B/</guid>
+        
+        <category>拾遗集</category>
         
         
         <category>jekyll</category>

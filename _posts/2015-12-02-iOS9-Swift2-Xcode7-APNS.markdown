@@ -2,8 +2,15 @@
 layout: post
 title:  "iOS9-Swift2-Xcode7的APNS使用"
 date:   2015-12-02 20:55:15
-categories: jekyll update
+subtitle:   "玩转iOS应用发布"
+author:     "黄帅"
+header-img: "img/post/2015-11-17-bg.jpg"
+tags:
+    - 拾遗集
 ---
+# iOS9-Swift2-Xcode7的APNS使用
+
+## 前言
 
 最近在开发基于阿里百川的即时通信功能，其中对于iOS平台的消息推送是要使用苹果的APNS服务的，对于这个服务不太了解的同学，可以看[apple开发者文档](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html?spm=0.0.0.0.EUOBVe)学习一下。
 
@@ -29,11 +36,13 @@ categories: jekyll update
 ### 2.获取DeviceToken
 在AppDelegate.swift中添加下面这个回调函数，用于获取DeviceToken
 
+```
 	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let token:String = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>"))
         print("token==\(token)")
         //将token发送到服务器
     }
+    ```
     
 使用阿里百川的SDK不需要将DeviceToken发送到服务器，IMSDK会自动得到该DeviceToken，你无须手动传给IMSDK
 

@@ -3,6 +3,11 @@ layout: post
 title:  "博文的开始"
 date:   2015-10-19 10:38:15
 categories: jekyll update
+subtitle:   "玩转iOS应用发布"
+author:     "黄帅"
+
+tags:
+    - 拾遗集
 ---
 起这个题目，是向我一个学长[致敬](http://blog.csdn.net/decting/article/details/8062457)。
 

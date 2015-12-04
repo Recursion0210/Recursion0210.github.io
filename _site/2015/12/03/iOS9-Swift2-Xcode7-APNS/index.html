@@ -15,7 +15,7 @@
 
     <title>iOS9-Swift2-Xcode7的APNS使用 - 黄帅的博客|huangshuai's Blog</title>
 
-    <link rel="canonical" href="http://recursion0210.github.io//jekyll/update/2015/12/03/iOS9-Swift2-Xcode7-APNS/">
+    <link rel="canonical" href="http://recursion0210.github.io//2015/12/03/iOS9-Swift2-Xcode7-APNS/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -68,7 +68,7 @@
             <a class="navbar-brand" href="/">recursion’s Blog</a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Collect the nav lks, forms, and other content for toggling -->
         <!-- Known Issue, found by Hux:
             <nav>'s height woule be hold on by its content.
             so, when navbar scale out, the <nav> will cover tags.
@@ -128,13 +128,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/common/home-bg.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post/2015-11-17-bg.jpg" width="0" height="0"> -->
 
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
-        background-image: url('/img/common/home-bg.jpg')
+        background-image: url('/img/post/2015-11-17-bg.jpg')
     }
 
 	/*导航*/
@@ -204,13 +204,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/tags/#拾遗集" title="拾遗集">拾遗集</a>
+                        
                     </div>
                     <h1>iOS9-Swift2-Xcode7的APNS使用</h1>
                     
                     
-                    <h2 class="subheading"></h2>
+                    <h2 class="subheading">玩转iOS应用发布</h2>
                     
-                    <span class="meta">Posted by recursion’s Blog on December 3, 2015</span>
+                    <span class="meta">Posted by 黄帅 on December 3, 2015</span>
                 </div>
             </div>
         </div>
@@ -241,7 +243,11 @@
         <b id="ScrollTopToggle" title="顶部" style="cursor:pointer;">Top</b>
     </p>
 </div>
-				<p>最近在开发基于阿里百川的即时通信功能，其中对于iOS平台的消息推送是要使用苹果的APNS服务的，对于这个服务不太了解的同学，可以看<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html?spm=0.0.0.0.EUOBVe">apple开发者文档</a>学习一下。</p>
+				<h1 id="ios9-swift2-xcode7apns">iOS9-Swift2-Xcode7的APNS使用</h1>
+
+<h2 id="section">前言</h2>
+
+<p>最近在开发基于阿里百川的即时通信功能，其中对于iOS平台的消息推送是要使用苹果的APNS服务的，对于这个服务不太了解的同学，可以看<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html?spm=0.0.0.0.EUOBVe">apple开发者文档</a>学习一下。</p>
 
 <h2 id="apns">总结一下使用APNS推送的步骤：</h2>
 
@@ -253,7 +259,7 @@
 
 <p>4.APNS系统往用户的手机推送消息</p>
 
-<h2 id="section">实现步骤：</h2>
+<h2 id="section-1">实现步骤：</h2>
 
 <h3 id="devicetoken">1.申请DeviceToken</h3>
 <p>在AppDelegate.swift中的application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -&gt; Bool中添加以下函数向系统申请DeviceToken</p>
@@ -266,12 +272,13 @@ UIApplication.sharedApplication().registerForRemoteNotifications()
 <h3 id="devicetoken-1">2.获取DeviceToken</h3>
 <p>在AppDelegate.swift中添加下面这个回调函数，用于获取DeviceToken</p>
 
-<pre><code>func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-    let token:String = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "&lt;&gt;"))
-    print("token==\(token)")
-    //将token发送到服务器
-}
-</code></pre>
+<p><code>
+	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let token:String = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "&lt;&gt;"))
+        print("token==\(token)")
+        //将token发送到服务器
+    }
+   </code></p>
 
 <p>使用阿里百川的SDK不需要将DeviceToken发送到服务器，IMSDK会自动得到该DeviceToken，你无须手动传给IMSDK</p>
 
@@ -281,7 +288,7 @@ UIApplication.sharedApplication().registerForRemoteNotifications()
 
 <p>在钥匙串应用找到这两个证书，右键点击导出，生产p12格式（阿里百川需要p12格式)，在将其上传到阿里百川的控制台。</p>
 
-<h3 id="section-1">4.测试消息推送</h3>
+<h3 id="section-2">4.测试消息推送</h3>
 <p>使用<a href="http://pan.baidu.com/s/1ntngmcL">该工具</a>,使用你上传的证书，向设备控制台打印出的DeviceToken，发送一条Push，确认是否可以收到Push。</p>
 
 <p>需要注意的是：项目的证书要和推送证书的类型一致，若是Disturbution证书就得使用Production SSL Certificate，若是Developer证书就得使用Development SSL Certificate。</p>
@@ -299,11 +306,15 @@ UIApplication.sharedApplication().registerForRemoteNotifications()
                 </style>
                 <div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="/jekyll/update/2015/12/03/iOS9-Swift2-Xcode7-APNS"
+                    data-thread-key="/2015/12/03/iOS9-Swift2-Xcode7-APNS"
                     data-title="iOS9-Swift2-Xcode7的APNS使用"
-                    data-url="http://recursion0210.github.io//jekyll/update/2015/12/03/iOS9-Swift2-Xcode7-APNS/"
-                    data-images="http://recursion0210.github.io//img/common/home-bg.jpg"
-                    data-content="最近在开发基于阿里百川的即时通信功能，其中对于iOS平台的消息推送是要使用苹果的APNS服务的，对于这个服务不太了解的同学，可以看apple开发者文档学习... | 黄帅的博客|huangshuai's Blog " >
+                    data-url="http://recursion0210.github.io//2015/12/03/iOS9-Swift2-Xcode7-APNS/"
+                    data-images="http://recursion0210.github.io//img/post/2015-11-17-bg.jpg"
+                    data-content="iOS9-Swift2-Xcode7的APNS使用
+
+前言
+
+最近在开发基于阿里百川的即时通信功能，其中对于iOS平台的消息推送是要使用苹果的APNS服务... | 黄帅的博客|huangshuai's Blog " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -338,9 +349,9 @@ UIApplication.sharedApplication().registerForRemoteNotifications()
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/jekyll/update/2015/12/03/iOS9-Swift2-Xcode7-APNS"
+                        data-thread-key="/2015/12/03/iOS9-Swift2-Xcode7-APNS"
                         data-title="iOS9-Swift2-Xcode7的APNS使用"
-                        data-url="http://recursion0210.github.io//jekyll/update/2015/12/03/iOS9-Swift2-Xcode7-APNS/" >
+                        data-url="http://recursion0210.github.io//2015/12/03/iOS9-Swift2-Xcode7-APNS/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->
@@ -361,6 +372,12 @@ UIApplication.sharedApplication().registerForRemoteNotifications()
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
         				
+                            
+                				<a href="/tags/#拾遗集" title="拾遗集" rel="2">
+                                    拾遗集
+                                </a>
+                            
+        				
         			</div>
                 </section>
                 
@@ -372,8 +389,8 @@ UIApplication.sharedApplication().registerForRemoteNotifications()
     </div>
 </article>
 <script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
- <script src="http://daiweilai.github.io/js/lightbox-plus-jquery.min.js"></script>
- <link rel="stylesheet" href="http://daiweilai.github.io/css/lightbox.css">
+ <script src="../js/lightbox-plus-jquery.min.js"></script>
+ <link rel="stylesheet" href="../css/lightbox.css">
 <script>
 $(".container").find("h2,h3,h4,h5,h6").each(function(i,item){
     var tag = $(item).get(0).localName;
@@ -416,7 +433,7 @@ $(".container").find("img").each(function(i,item){
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
     // dynamic User by Hux
-    var _user = '黄帅';
+    var _user = 'recursion0210';
 
     // duoshuo comment query.
     var duoshuoQuery = {short_name: _user };
@@ -490,6 +507,15 @@ $(".container").find("img").each(function(i,item){
 
                     <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
                     
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/2189929640">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
                     
 
 
