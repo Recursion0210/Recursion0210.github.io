@@ -1,6 +1,6 @@
 # Site settings
 title: recursion’s Blog
-SEOTitle: 黄帅的博客|huangshuai's Blog
+SEOTitle: 黄帅的博客
 header-img: img/common/home-bg.jpg
 email: daiweilai@foxmail.com
 description: "与世界分享我的知识、经验和见解"
@@ -58,7 +58,7 @@ duoshuo_share: true                     # set to false if you want to use Commen
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "正在努力学习，成为IOT的Full Stack Engineer"
+sidebar-about-description: "希望成为IOT Full Stack Engineer"
 sidebar-avatar: ../img/common/avatar.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 

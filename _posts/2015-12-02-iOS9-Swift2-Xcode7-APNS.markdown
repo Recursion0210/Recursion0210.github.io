@@ -2,9 +2,9 @@
 layout: post
 title:  "iOS9-Swift2-Xcode7的APNS使用"
 date:   2015-12-02 20:55:15
-subtitle:   "玩转iOS应用发布"
+subtitle:   "学习iOS开发"
 author:     "黄帅"
-header-img: "img/post/2015-11-17-bg.jpg"
+header-img: "img/bg/2bg.jpg"
 tags:
     - 拾遗集
 ---
@@ -42,7 +42,7 @@ tags:
         print("token==\(token)")
         //将token发送到服务器
     }
-    ```
+```
     
 使用阿里百川的SDK不需要将DeviceToken发送到服务器，IMSDK会自动得到该DeviceToken，你无须手动传给IMSDK
 

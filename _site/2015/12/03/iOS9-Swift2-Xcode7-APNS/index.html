@@ -13,7 +13,7 @@
 	<link href="../css/prism.css" rel="stylesheet" />
 	<script src="../js/prism.js"></script>
 
-    <title>iOS9-Swift2-Xcode7的APNS使用 - 黄帅的博客|huangshuai's Blog</title>
+    <title>iOS9-Swift2-Xcode7的APNS使用 - 黄帅的博客</title>
 
     <link rel="canonical" href="http://recursion0210.github.io//2015/12/03/iOS9-Swift2-Xcode7-APNS/">
 
@@ -128,13 +128,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post/2015-11-17-bg.jpg" width="0" height="0"> -->
+<!-- <img src="/img/bg/2bg.jpg" width="0" height="0"> -->
 
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
-        background-image: url('/img/post/2015-11-17-bg.jpg')
+        background-image: url('/img/bg/2bg.jpg')
     }
 
 	/*导航*/
@@ -210,7 +210,7 @@
                     <h1>iOS9-Swift2-Xcode7的APNS使用</h1>
                     
                     
-                    <h2 class="subheading">玩转iOS应用发布</h2>
+                    <h2 class="subheading">学习iOS开发</h2>
                     
                     <span class="meta">Posted by 黄帅 on December 3, 2015</span>
                 </div>
@@ -272,13 +272,12 @@ UIApplication.sharedApplication().registerForRemoteNotifications()
 <h3 id="devicetoken-1">2.获取DeviceToken</h3>
 <p>在AppDelegate.swift中添加下面这个回调函数，用于获取DeviceToken</p>
 
-<p><code>
-	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+<pre><code>	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let token:String = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "&lt;&gt;"))
         print("token==\(token)")
         //将token发送到服务器
     }
-   </code></p>
+</code></pre>
 
 <p>使用阿里百川的SDK不需要将DeviceToken发送到服务器，IMSDK会自动得到该DeviceToken，你无须手动传给IMSDK</p>
 
@@ -309,12 +308,12 @@ UIApplication.sharedApplication().registerForRemoteNotifications()
                     data-thread-key="/2015/12/03/iOS9-Swift2-Xcode7-APNS"
                     data-title="iOS9-Swift2-Xcode7的APNS使用"
                     data-url="http://recursion0210.github.io//2015/12/03/iOS9-Swift2-Xcode7-APNS/"
-                    data-images="http://recursion0210.github.io//img/post/2015-11-17-bg.jpg"
+                    data-images="http://recursion0210.github.io//img/bg/2bg.jpg"
                     data-content="iOS9-Swift2-Xcode7的APNS使用
 
 前言
 
-最近在开发基于阿里百川的即时通信功能，其中对于iOS平台的消息推送是要使用苹果的APNS服务... | 黄帅的博客|huangshuai's Blog " >
+最近在开发基于阿里百川的即时通信功能，其中对于iOS平台的消息推送是要使用苹果的APNS服务... | 黄帅的博客 " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -334,12 +333,12 @@ UIApplication.sharedApplication().registerForRemoteNotifications()
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/jekyll/update/2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0/" data-toggle="tooltip" data-placement="top" title="iOS-webApp客户端 开发小记">&larr; Previous Post</a>
+                        <a href="/2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0/" data-toggle="tooltip" data-placement="top" title="iOS-webApp客户端 开发小记">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/jekyll/update/2015/12/03/%E5%8D%B3%E6%97%B6%E9%80%9A%E4%BF%A1%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91/" data-toggle="tooltip" data-placement="top" title="阿里百川-即时通讯功能开发">Next Post &rarr;</a>
+                        <a href="/2015/12/03/%E5%8D%B3%E6%97%B6%E9%80%9A%E4%BF%A1%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91/" data-toggle="tooltip" data-placement="top" title="阿里百川-即时通讯功能开发">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -373,7 +372,7 @@ UIApplication.sharedApplication().registerForRemoteNotifications()
                     <div class="tags">
         				
                             
-                				<a href="/tags/#拾遗集" title="拾遗集" rel="2">
+                				<a href="/tags/#拾遗集" title="拾遗集" rel="5">
                                     拾遗集
                                 </a>
                             

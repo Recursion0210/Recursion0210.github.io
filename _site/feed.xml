@@ -5,15 +5,47 @@
     <description>与世界分享我的知识、经验和见解</description>
     <link>http://recursion0210.github.io//</link>
     <atom:link href="http://recursion0210.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 04 Dec 2015 22:21:06 +0800</pubDate>
-    <lastBuildDate>Fri, 04 Dec 2015 22:21:06 +0800</lastBuildDate>
+    <pubDate>Mon, 07 Dec 2015 16:35:47 +0800</pubDate>
+    <lastBuildDate>Mon, 07 Dec 2015 16:35:47 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
-        <title>阿里百川-即时通讯功能开发</title>
-        <description>&lt;p&gt;在&lt;a href=&quot;../../11/06/iOS-webApp客户端开发-小记.html&quot;&gt;iOS-webApp客户端开发小记&lt;/a&gt; 的最后，我提到我们公司的产品需要在现有产品结构中加入即时通讯功能。&lt;/p&gt;
+        <title>阿里百川、友盟推送集成问题</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;前言&lt;/h2&gt;
 
-&lt;p&gt;#项目需求：&lt;/p&gt;
+&lt;p&gt;我在安卓项目中集成了阿里百川的SDK，又集成友盟的消息推送SDK，项目编译的时候就会报以下错误。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Multiple dex files define Lcom/ta/utdid2/android/utils/UTDID
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;报错说的很清楚:是项目引用的JAR包有重复的地方。后发现集成阿里系的SDK（支付宝等）都会出现此错误。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;错误原因&lt;/h2&gt;
+
+&lt;p&gt;1.友盟推送SDK为了提高设备标识的唯一性，除了UMID之外，还用到了Taobao提供的一个设备标识生成库(UTDID.jar)做双向保证。当前推送SDK兼容的UDID版本是V1.1.0。&lt;/p&gt;
+
+&lt;p&gt;2.淘宝提供的设备标识生成库(UTDID.jar)已经广泛应用在阿里系的App中了，包括支付宝。部分集成过支付宝SDK的App，在集成友盟推送SDK的时候，会存在包冲突的问题。 为此我们提供了去UTDID版本的SDK供开发者集成使用&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;解决方法&lt;/h2&gt;
+
+&lt;p&gt;1.到友盟&lt;a href=&quot;http://dev.umeng.com/push/android/sdk-download&quot;&gt;SDK下载页&lt;/a&gt;去下载去UTDID版本的SDK，再集成到安卓项目中&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 07 Dec 2015 23:50:15 +0800</pubDate>
+        <link>http://recursion0210.github.io//2015/12/07/%E9%98%BF%E9%87%8C%E7%99%BE%E5%B7%9D%E3%80%81%E5%8F%8B%E7%9B%9F%E6%8E%A8%E9%80%81%E9%9B%86%E6%88%90%E9%97%AE%E9%A2%98/</link>
+        <guid isPermaLink="true">http://recursion0210.github.io//2015/12/07/%E9%98%BF%E9%87%8C%E7%99%BE%E5%B7%9D%E3%80%81%E5%8F%8B%E7%9B%9F%E6%8E%A8%E9%80%81%E9%9B%86%E6%88%90%E9%97%AE%E9%A2%98/</guid>
+        
+        <category>拾遗集</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>阿里百川-即时通讯功能开发</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;前言&lt;/h2&gt;
+&lt;p&gt;在&lt;a href=&quot;../../11/06/iOS-webApp客户端开发-小记.html&quot;&gt;iOS-webApp客户端开发小记&lt;/a&gt; 的最后，我提到我们公司的产品需要在现有产品结构中加入即时通讯功能。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;项目需求&lt;/h2&gt;
 
 &lt;p&gt;1.学生与老师之间要能沟通（单聊）&lt;/p&gt;
 
@@ -21,22 +53,20 @@
 
 &lt;p&gt;3.学生和老师要可以和我们公司的技术支持人员能沟通（客服）&lt;/p&gt;
 
-&lt;p&gt;#技术选型：&lt;br /&gt;
-前期调研了容联云、LeanCloud、环信、Bmob、阿里百川、友盟等一些做即时通信服务的第三方服务。首先我们需要其提供iOS、Android、h5、Java的SDK，接着试用了他们的Demo，然后看他们的开发文档是否详尽（公司与公司之间的开发文档真的差距好大），最后看他们的技术实力与公司实力（总不能比我们的产品先倒闭吧，哈哈）。&lt;/p&gt;
+&lt;h2 id=&quot;section-2&quot;&gt;技术选型&lt;/h2&gt;
+&lt;p&gt;前期调研了容联云、LeanCloud、环信、Bmob、阿里百川、友盟等一些做即时通信服务的第三方服务。首先我们需要其提供iOS、Android、h5、Java的SDK，接着试用了他们的Demo，然后看他们的开发文档是否详尽（公司与公司之间的开发文档真的差距好大），最后看他们的技术实力与公司实力（总不能比我们的产品先倒闭吧，哈哈）。&lt;/p&gt;
 
 &lt;p&gt;最后选中了阿里百川，首先其是阿里无线事业部下属的，他们的技术实力和公司实力不用怀疑。其实我第一眼看中的还是他们的开发文档，非常的完善，其次是这个项目应该开始不久，他们的技术支持非常给力，一线的开发人员在充当客服。&lt;/p&gt;
 
-&lt;p&gt;#项目开发&lt;br /&gt;
-未完待续&lt;/p&gt;
+&lt;h2 id=&quot;section-3&quot;&gt;项目开发&lt;/h2&gt;
+&lt;p&gt;未完待续&lt;/p&gt;
 </description>
         <pubDate>Thu, 03 Dec 2015 04:55:15 +0800</pubDate>
-        <link>http://recursion0210.github.io//jekyll/update/2015/12/03/%E5%8D%B3%E6%97%B6%E9%80%9A%E4%BF%A1%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91/</link>
-        <guid isPermaLink="true">http://recursion0210.github.io//jekyll/update/2015/12/03/%E5%8D%B3%E6%97%B6%E9%80%9A%E4%BF%A1%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91/</guid>
+        <link>http://recursion0210.github.io//2015/12/03/%E5%8D%B3%E6%97%B6%E9%80%9A%E4%BF%A1%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91/</link>
+        <guid isPermaLink="true">http://recursion0210.github.io//2015/12/03/%E5%8D%B3%E6%97%B6%E9%80%9A%E4%BF%A1%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91/</guid>
         
+        <category>拾遗集</category>
         
-        <category>jekyll</category>
-        
-        <category>update</category>
         
       </item>
     
@@ -71,13 +101,12 @@ UIApplication.sharedApplication().registerForRemoteNotifications()
 &lt;h3 id=&quot;devicetoken-1&quot;&gt;2.获取DeviceToken&lt;/h3&gt;
 &lt;p&gt;在AppDelegate.swift中添加下面这个回调函数，用于获取DeviceToken&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+&lt;pre&gt;&lt;code&gt;	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let token:String = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: &quot;&amp;lt;&amp;gt;&quot;))
         print(&quot;token==\(token)&quot;)
         //将token发送到服务器
     }
-   &lt;/code&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;使用阿里百川的SDK不需要将DeviceToken发送到服务器，IMSDK会自动得到该DeviceToken，你无须手动传给IMSDK&lt;/p&gt;
 
@@ -108,13 +137,10 @@ UIApplication.sharedApplication().registerForRemoteNotifications()
   &lt;p&gt;这篇文章，现在是我写的第二遍，因为就在我刚才准备commit的时候，手贱点了sync，结果白写了一个小时。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;暑期以来我一直在一家物联网公司实习，刚来的时候开发了一款物联网云服务的iOS客户端，也许你会问为啥&lt;br /&gt;
-一个实习生刚来就开发产品，主要原因是我能力超强，还有一个很小的原因是全公司就我用Mac，并且会点点&lt;br /&gt;
-Swift，哈哈。&lt;/p&gt;
+&lt;h2 id=&quot;section&quot;&gt;前言&lt;/h2&gt;
+&lt;p&gt;暑期以来我一直在一家物联网公司实习，刚来的时候开发了一款物联网云服务的iOS客户端，也许你会问为啥一个实习生刚来就开发产品，主要原因是我能力超强，还有一个很小的原因是全公司就我用Mac，并且会点点Swift，哈哈。&lt;/p&gt;
 
-&lt;p&gt;一开始是开发一款物联网应用的iOS客户端（&lt;a href=&quot;https://itunes.apple.com/us/app/iotcloud/id1045360550?l=zh&amp;amp;ls=1&amp;amp;mt=8&quot;&gt;1.0版本&lt;/a&gt;现在已上线），后期开发了一段时间这个产品的后台，主要是MongoDB和Java Web。之后，我又被叫去开&lt;br /&gt;
-发另一款云教育应用的iOS客户端和Android客户端。这篇文章主要介绍的是开发这两款iOS应用的总结，&lt;br /&gt;
-后期会总结一下在Android上实现同样功能的经验。&lt;/p&gt;
+&lt;p&gt;刚来是开发一款物联网应用的iOS客户端（&lt;a href=&quot;https://itunes.apple.com/us/app/iotcloud/id1045360550?l=zh&amp;amp;ls=1&amp;amp;mt=8&quot;&gt;1.0版本&lt;/a&gt;现在已上线），后期开发了一段时间这个产品的后台，主要是MongoDB和Java Web。之后，我又被叫去开发另一款云教育应用的iOS客户端和Android客户端。这篇文章主要介绍的是开发这两款iOS应用的总结，后期会总结一下在Android上实现同样功能的经验。&lt;/p&gt;
 
 &lt;p&gt;我们公司的产品都是前端是采用HTML5的，这样每个平台的客户端只要套个UIWebView的壳子就好。但是问题不是全部网页都是从服务器端加载的，因为不能保证网络一直畅通，以及服务器没有错，要是网络不通，那整个应用就是一片空白，这样的体验太差了。&lt;/p&gt;
 
@@ -122,7 +148,7 @@ Swift，哈哈。&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;###1. 先说说应用逻辑&lt;/p&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;应用逻辑&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -141,7 +167,7 @@ Swift，哈哈。&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;###2. 再聊聊遇到的问题以及解决方法&lt;/p&gt;
+&lt;h2 id=&quot;section-2&quot;&gt;遇到的问题以及解决方法&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -242,33 +268,43 @@ Swift，哈哈。&lt;/p&gt;
   &lt;li&gt;
     &lt;p&gt;判断网络状态&lt;/p&gt;
 
-    &lt;p&gt;问题：是这样的，由于产品登陆完之后，全部内容都在UIWebView中，要是网络突然断了，就会显示无法连接界面，这样用户体验不好，如果后面能联网了，又不能返回到断网之前的界面。&lt;/p&gt;
+    &lt;h5 id=&quot;section-3&quot;&gt;问题：&lt;/h5&gt;
 
-    &lt;p&gt;需求：在尽量不改后台的情况下，解决上面的问题&lt;/p&gt;
+    &lt;p&gt;是这样的，由于产品登陆完之后，全部内容都在UIWebView中，要是网络突然断了，就会显示无法连接界面，这样用户体验不好，如果后面能联网了，又不能返回到断网之前的界面。&lt;/p&gt;
 
-    &lt;p&gt;解决思路：在每次需要跳转之前，先判断一下网络状态，若是可以联网则不处理；若不能联网，则存储当前链接，并跳转到本地一个不能联网的界面，该界面上有刷新按钮，通过不断点击刷新按钮来重复跳转该界面，然后可以判断网络情况，若可以联网了，则加载之前存储的链接。&lt;/p&gt;
+    &lt;h5 id=&quot;section-4&quot;&gt;需求：&lt;/h5&gt;
+
+    &lt;p&gt;在尽量不改后台的情况下，解决上面的问题&lt;/p&gt;
+
+    &lt;h5 id=&quot;section-5&quot;&gt;解决思路：&lt;/h5&gt;
+
+    &lt;p&gt;在每次需要跳转之前，先判断一下网络状态，若是可以联网则不处理；若不能联网，则存储当前链接，并跳转到本地一个不能联网的界面，该界面上有刷新按钮，通过不断点击刷新按钮来重复跳转该界面，然后可以判断网络情况，若可以联网了，则加载之前存储的链接。&lt;/p&gt;
 
     &lt;p&gt;上面的逻辑代码就不贴了，没有参考意义，反正就是在上面第四点的webView方法中进行处理。这里我放一个判断网络状态的项目地址&lt;a href=&quot;https://github.com/ashleymills/Reachability.swift&quot;&gt;Reachability.swift-github&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;即时通讯&lt;/p&gt;
 
-    &lt;p&gt;问题：由于我们的项目是做教育类的，需要用户之间可以进行类似于微信那样的通信功能，并且可以进行实时音、视频通话功能。&lt;/p&gt;
+    &lt;h5 id=&quot;section-6&quot;&gt;问题：&lt;/h5&gt;
 
-    &lt;p&gt;需求：实现上述功能，还要尽可能的保证服务质量&lt;/p&gt;
+    &lt;p&gt;由于我们的项目是做教育类的，需要用户之间可以进行类似于微信那样的通信功能，并且可以进行实时音、视频通话功能。&lt;/p&gt;
 
-    &lt;p&gt;解决思路：我想到的方法是集成第三方的服务，目前用的是&lt;a href=&quot;http://www.yuntongxun.com/&quot;&gt;容联云服务&lt;/a&gt;。还没做完，未完待续。&lt;/p&gt;
+    &lt;h5 id=&quot;section-7&quot;&gt;需求：&lt;/h5&gt;
+
+    &lt;p&gt;实现上述功能，还要尽可能的保证服务质量&lt;/p&gt;
+
+    &lt;h5 id=&quot;section-8&quot;&gt;解决思路：&lt;/h5&gt;
+
+    &lt;p&gt;我想到的方法是集成第三方的服务，目前用的是&lt;a href=&quot;http://www.yuntongxun.com/&quot;&gt;容联云服务&lt;/a&gt;。还没做完，未完待续。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Fri, 06 Nov 2015 01:00:15 +0800</pubDate>
-        <link>http://recursion0210.github.io//jekyll/update/2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0/</link>
-        <guid isPermaLink="true">http://recursion0210.github.io//jekyll/update/2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0/</guid>
+        <link>http://recursion0210.github.io//2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0/</link>
+        <guid isPermaLink="true">http://recursion0210.github.io//2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0/</guid>
         
+        <category>拾遗集</category>
         
-        <category>jekyll</category>
-        
-        <category>update</category>
         
       </item>
     
