@@ -1,18 +1,19 @@
 ---
 layout: post
-title:  "阿里百川、友盟推送集成问题"
+title:  "阿里百川、友盟推送SDK集成"
 date:   2015-12-07 15:50:15
 subtitle:   "玩转阿里百川即时通信"
 author:     "黄帅"
 header-img: "img/bg/2bg.jpg"
 tags:
-    - 拾遗集
+    - Android 
+    - 阿里百川即时通讯
 ---
 
 
 ## 前言
 
-我在安卓项目中集成了阿里百川的SDK，又集成友盟的消息推送SDK，项目编译的时候就会报以下错误。
+我在安卓项目中先集成了阿里百川即时通讯的SDK，后又集成友盟的消息推送SDK，项目编译的时候就会报以下错误。
 
 ```
 Multiple dex files define Lcom/ta/utdid2/android/utils/UTDID
