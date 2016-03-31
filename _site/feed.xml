@@ -5,8 +5,8 @@
     <description>与世界分享我的知识、经验和见解</description>
     <link>http://recursion0210.github.io//</link>
     <atom:link href="http://recursion0210.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 09 Mar 2016 21:08:18 +0800</pubDate>
-    <lastBuildDate>Wed, 09 Mar 2016 21:08:18 +0800</lastBuildDate>
+    <pubDate>Thu, 31 Mar 2016 09:48:20 +0800</pubDate>
+    <lastBuildDate>Thu, 31 Mar 2016 09:48:20 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -76,13 +76,12 @@
 &lt;h4 id=&quot;step6-imsdk&quot;&gt;Step6 初始化IMSDK&lt;/h4&gt;
 &lt;p&gt;在AppDelegate.swift调用基础入口胶水函数：callThisInDidFinishLaunching&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -&amp;gt; Bool {
-    // Override point for customization after application launch.
-    //函数中初始化IMSDK
-    SPKitExample.sharedInstance().callThisInDidFinishLaunching()        
-    return true
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;application&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;application&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;UIApplication&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;didFinishLaunchingWithOptions&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;launchOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;NSObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AnyObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// Override point for customization after application launch.&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;//函数中初始化IMSDK&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;SPKitExample&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sharedInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;callThisInDidFinishLaunching&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;        
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;注意：要到SPKitExample.m里exampleInit登录函数这把key换成我们自己申请的AppKey&lt;/p&gt;
 

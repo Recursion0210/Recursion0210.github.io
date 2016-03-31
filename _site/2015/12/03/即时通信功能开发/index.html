@@ -277,13 +277,12 @@
 <h4 id="step6-imsdk">Step6 初始化IMSDK</h4>
 <p>在AppDelegate.swift调用基础入口胶水函数：callThisInDidFinishLaunching</p>
 
-<pre><code>func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -&gt; Bool {
-    // Override point for customization after application launch.
-    //函数中初始化IMSDK
-    SPKitExample.sharedInstance().callThisInDidFinishLaunching()        
-    return true
-}
-</code></pre>
+<div class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="lineno">1</span> <span class="k">func</span> <span class="n">application</span><span class="p">(</span><span class="nl">application</span><span class="p">:</span> <span class="bp">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="nl">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="nl">NSObject</span><span class="p">:</span> <span class="n">AnyObject</span><span class="p">]</span><span class="o">?</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Bool</span> <span class="p">{</span>
+<span class="lineno">2</span>         <span class="c1">// Override point for customization after application launch.</span>
+<span class="lineno">3</span>         <span class="c1">//函数中初始化IMSDK</span>
+<span class="lineno">4</span>         <span class="n">SPKitExample</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">callThisInDidFinishLaunching</span><span class="p">()</span>        
+<span class="lineno">5</span>         <span class="k">return</span> <span class="nb">true</span>
+<span class="lineno">6</span>     <span class="p">}</span></code></pre></div>
 
 <p>注意：要到SPKitExample.m里exampleInit登录函数这把key换成我们自己申请的AppKey</p>
 
