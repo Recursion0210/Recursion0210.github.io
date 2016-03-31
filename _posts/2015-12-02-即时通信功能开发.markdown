@@ -43,14 +43,12 @@ tags:
 #### Step6 初始化IMSDK
 在AppDelegate.swift调用基础入口胶水函数：callThisInDidFinishLaunching
 
-{% highlight swift linenos%}
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         //函数中初始化IMSDK
         SPKitExample.sharedInstance().callThisInDidFinishLaunching()        
         return true
     }
-{% endhighlight %}
 
 注意：要到SPKitExample.m里exampleInit登录函数这把key换成我们自己申请的AppKey
 

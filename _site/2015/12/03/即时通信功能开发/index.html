@@ -31,7 +31,7 @@
     <!-- Hux change font-awesome CDN to qiniu -->
     <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-     <link rel="stylesheet" href="/css/highlight.css">
+    <!--  <link rel="stylesheet" href="/css/highlight.css"> -->
     <!-- Hux Delete, sad but pending in China
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
@@ -277,12 +277,13 @@
 <h4 id="step6-imsdk">Step6 初始化IMSDK</h4>
 <p>在AppDelegate.swift调用基础入口胶水函数：callThisInDidFinishLaunching</p>
 
-<div class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="lineno">1</span> <span class="k">func</span> <span class="n">application</span><span class="p">(</span><span class="nl">application</span><span class="p">:</span> <span class="bp">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="nl">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="nl">NSObject</span><span class="p">:</span> <span class="n">AnyObject</span><span class="p">]</span><span class="o">?</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Bool</span> <span class="p">{</span>
-<span class="lineno">2</span>         <span class="c1">// Override point for customization after application launch.</span>
-<span class="lineno">3</span>         <span class="c1">//函数中初始化IMSDK</span>
-<span class="lineno">4</span>         <span class="n">SPKitExample</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">callThisInDidFinishLaunching</span><span class="p">()</span>        
-<span class="lineno">5</span>         <span class="k">return</span> <span class="nb">true</span>
-<span class="lineno">6</span>     <span class="p">}</span></code></pre></div>
+<pre><code>func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -&gt; Bool {
+    // Override point for customization after application launch.
+    //函数中初始化IMSDK
+    SPKitExample.sharedInstance().callThisInDidFinishLaunching()        
+    return true
+}
+</code></pre>
 
 <p>注意：要到SPKitExample.m里exampleInit登录函数这把key换成我们自己申请的AppKey</p>
 
