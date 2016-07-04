@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>recursion’s Blog</title>
+    <title>Hus Blog</title>
     <description>与世界分享我的知识、经验和见解</description>
     <link>http://recursion0210.github.io//</link>
     <atom:link href="http://recursion0210.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 04 Jul 2016 17:11:28 +0800</pubDate>
-    <lastBuildDate>Mon, 04 Jul 2016 17:11:28 +0800</lastBuildDate>
+    <pubDate>Mon, 04 Jul 2016 17:37:20 +0800</pubDate>
+    <lastBuildDate>Mon, 04 Jul 2016 17:37:20 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
