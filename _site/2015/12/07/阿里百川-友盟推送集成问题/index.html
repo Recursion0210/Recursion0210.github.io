@@ -13,9 +13,9 @@
 	<link href="../css/prism.css" rel="stylesheet" />
 	<script src="../js/prism.js"></script>
 
-    <title>博文的开始 - 黄帅的博客</title>
+    <title>阿里百川、友盟推送SDK集成 - 黄帅的博客</title>
 
-    <link rel="canonical" href="http://recursion0210.github.io//jekyll/update/2015/10/19/%E5%8D%9A%E6%96%87%E7%9A%84%E5%BC%80%E5%A7%8B/">
+    <link rel="canonical" href="http://recursion0210.github.io//2015/12/07/%E9%98%BF%E9%87%8C%E7%99%BE%E5%B7%9D-%E5%8F%8B%E7%9B%9F%E6%8E%A8%E9%80%81%E9%9B%86%E6%88%90%E9%97%AE%E9%A2%98/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -204,15 +204,17 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#拾遗集" title="拾遗集">拾遗集</a>
+                        <a class="tag" href="/tags/#Android" title="Android">Android</a>
+                        
+                        <a class="tag" href="/tags/#阿里百川即时通讯" title="阿里百川即时通讯">阿里百川即时通讯</a>
                         
                     </div>
-                    <h1>博文的开始</h1>
+                    <h1>阿里百川、友盟推送SDK集成</h1>
                     
                     
-                    <h2 class="subheading"></h2>
+                    <h2 class="subheading">玩转阿里百川即时通信</h2>
                     
-                    <span class="meta">Posted by 黄帅 on October 19, 2015</span>
+                    <span class="meta">Posted by 黄帅 on December 7, 2015</span>
                 </div>
             </div>
         </div>
@@ -243,30 +245,25 @@
         <b id="ScrollTopToggle" title="顶部" style="cursor:pointer;">Top</b>
     </p>
 </div>
-				<p>起这个题目，是向我一个学长<a href="http://blog.csdn.net/decting/article/details/8062457">致敬</a>。</p>
+				<h2 id="section">前言</h2>
 
-<p>今天是2015年元旦，照这样说来就算是去年，我认识了这个学长。当初是请教学长安卓问题，然后由于时间问题直接到学长寝室请他帮忙调程序。说真的，看着高手调程序真的能学到太多，他们解决问题的思路和方法真的很值得我们去学习，我记得当时学会了用Log.i(“”,”“)来跟踪程序运行状况。</p>
+<p>我在安卓项目中先集成了阿里百川即时通讯的SDK，后又集成友盟的消息推送SDK，项目编译的时候就会报以下错误。</p>
 
-<p>进入大学三年了，期间从网上学习了很多东西，一直以来我只是有一个互联网内容消费者，没有创造过什么。CSDN的账号创建很久了，每次看到技术牛人写的关于各类问题的解决方法以及他们自身对于问题的思考，就非常的崇拜以及感谢他们的付出。经常在看完他们的技术博客之后，在想自己是不是也能写一点什么，就像知乎说的那样，与世界分享你的知识和见解，然而一拖就拖到现在。其实，原来也真的什么都不会，没得内容来与大家分享。渐渐的我也做了一些项目，成为了学弟们的学长，我想我也应该把自己遇到问题的一些解决方法和对这些方法的思考写出来，而不是只记录在我自己的OneNote里面。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Multiple dex files define Lcom/ta/utdid2/android/utils/UTDID
+</code></pre>
+</div>
 
-<p>我是物联网专业学生，所开发的一些也都是软硬件结合的项目，我会在此与大家分享经验。</p>
+<p>报错说的很清楚:是项目引用的JAR包有重复的地方。后发现集成阿里系的SDK（支付宝等）都会出现此错误。</p>
 
-<p>好了，那这第一篇文章就作为我新阶段的开始，2015年我会准备考研，因此会对相关的科目进行复习与总结，我也会在此记录我考研路上对于专业相关问题的感悟。
-   最后，从学长那抄一句：</p>
+<h2 id="section-1">错误原因</h2>
 
-<blockquote>
-  <p>我们的目标是没有遗憾。</p>
-</blockquote>
+<p>1.友盟推送SDK为了提高设备标识的唯一性，除了UMID之外，还用到了Taobao提供的一个设备标识生成库(UTDID.jar)做双向保证。当前推送SDK兼容的UDID版本是V1.1.0。</p>
 
-<hr />
+<p>2.淘宝提供的设备标识生成库(UTDID.jar)已经广泛应用在阿里系的App中了，包括支付宝。部分集成过支付宝SDK的App，在集成友盟推送SDK的时候，会存在包冲突的问题。 为此我们提供了去UTDID版本的SDK供开发者集成使用</p>
 
-<p>以上是我在2015年1月1日在CSDN上写的第一篇博文，</p>
+<h2 id="section-2">解决方法</h2>
 
-<p>当时已值大三，开博的目的是可以分享一些项目经验以及记录一下考研备战路上的点点滴滴。可惜当时准备考研，后期在写过一篇《Android-Lint使用后的错误解决》之后便停滞项目开发了，后来到了五月份，我放弃了考研，一心想着就业，于是暑期开始便一直在北京一家物联网公司实习，时间飞快，有些事情却偏偏以它奇怪的姿势改变我的轨迹，比如：我保研了。</p>
-
-<p>前段时间把公司一个产品的iOS客户端写好，然后从注册开发者账号开始到最后弄上App Store，至此我也算一个iOS开发菜鸟了，哈哈。上周把MongoDB项目暂时完成了，经理儿子出世回家去了，所以这几天也没有人给我安排工作，在网上瞎逛的时候，突然想起来今年第一天给自己安排的任务，于是花了一上午学习Markdown和Github Page以及jekyll。</p>
-
-<p>我想在未来的日子里，我应该做点什么了，逝者如斯夫，应该把生活过的像自己想要的那样，才对嘛。</p>
+<p>1.到友盟<a href="http://dev.umeng.com/push/android/sdk-download">SDK下载页</a>去下载去UTDID版本的SDK，再集成到安卓项目中</p>
 
 
 
@@ -281,13 +278,15 @@
                 </style>
                 <div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="/jekyll/update/2015/10/19/博文的开始"
-                    data-title="博文的开始"
-                    data-url="http://recursion0210.github.io//jekyll/update/2015/10/19/%E5%8D%9A%E6%96%87%E7%9A%84%E5%BC%80%E5%A7%8B/"
+                    data-thread-key="/2015/12/07/阿里百川、友盟推送集成问题"
+                    data-title="阿里百川、友盟推送SDK集成"
+                    data-url="http://recursion0210.github.io//2015/12/07/%E9%98%BF%E9%87%8C%E7%99%BE%E5%B7%9D-%E5%8F%8B%E7%9B%9F%E6%8E%A8%E9%80%81%E9%9B%86%E6%88%90%E9%97%AE%E9%A2%98/"
                     data-images="http://recursion0210.github.io//img/bg/2bg.jpg"
-                    data-content="起这个题目，是向我一个学长致敬。
+                    data-content="前言
 
-今天是2015年元旦，照这样说来就算是去年，我认识了这个学长。当初是请教学长安卓问题，然后由于时间问题直接到学长寝室请... | 黄帅的博客 " >
+我在安卓项目中先集成了阿里百川即时通讯的SDK，后又集成友盟的消息推送SDK，项目编译的时候就会报以下错误。
+
+Multiple dex file... | 黄帅的博客 " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -306,10 +305,10 @@
 
                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/2015/11/06/iOS-webApp%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91-%E5%B0%8F%E8%AE%B0/" data-toggle="tooltip" data-placement="top" title="iOS-webApp客户端 开发小记">Next Post &rarr;</a>
+                    <li class="previous">
+                        <a href="/2015/12/03/%E5%8D%B3%E6%97%B6%E9%80%9A%E4%BF%A1%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91/" data-toggle="tooltip" data-placement="top" title="阿里百川即时通讯功能-iOS开发">&larr; Previous Post</a>
                     </li>
+                    
                     
                 </ul>
 
@@ -318,9 +317,9 @@
                 <!-- 多说评论框 start -->
                 <div class="comment">
                     <div class="ds-thread"
-                        data-thread-key="/jekyll/update/2015/10/19/博文的开始"
-                        data-title="博文的开始"
-                        data-url="http://recursion0210.github.io//jekyll/update/2015/10/19/%E5%8D%9A%E6%96%87%E7%9A%84%E5%BC%80%E5%A7%8B/" >
+                        data-thread-key="/2015/12/07/阿里百川、友盟推送集成问题"
+                        data-title="阿里百川、友盟推送SDK集成"
+                        data-url="http://recursion0210.github.io//2015/12/07/%E9%98%BF%E9%87%8C%E7%99%BE%E5%B7%9D-%E5%8F%8B%E7%9B%9F%E6%8E%A8%E9%80%81%E9%9B%86%E6%88%90%E9%97%AE%E9%A2%98/" >
                     </div>
                 </div>
                 <!-- 多说评论框 end -->

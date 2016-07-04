@@ -290,22 +290,25 @@
 
     <p>刚开始用Xcode6开发第一项目的时候，UIWebView联网是没有问题的，第二个项目使用的是Xcode7和iOS9，就连打开baidu都无法实现，控制台会报错：</p>
 
-    <pre><code> Application Transport Security has blocked a cleartext HTTP (http://)
+    <div class="highlighter-rouge"><pre class="highlight"><code> Application Transport Security has blocked a cleartext HTTP (http://)
  resource load since it is insecure. Temporary exceptions can be configured
  via your app's Info.plist file.
 </code></pre>
+    </div>
 
     <p>当时在Stack Overflow找到原因了：</p>
 
-    <pre><code> 在iOS9 beta1中，苹果将原http协议改成了https协议，使用 TLS1.2 SSL加密请求数据。
+    <div class="highlighter-rouge"><pre class="highlight"><code> 在iOS9 beta1中，苹果将原http协议改成了https协议，使用 TLS1.2 SSL加密请求数据。
 </code></pre>
+    </div>
 
     <p>解决方法就是：</p>
 
-    <pre><code> 在info.plist中添加
+    <div class="highlighter-rouge"><pre class="highlight"><code> 在info.plist中添加
  &lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
  &lt;dict&gt;&lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;&lt;true/&gt;&lt;/dict&gt;
 </code></pre>
+    </div>
 
     <p>后来在<a href="http://www.infoq.com/cn/articles/wechat-ios9-adaptation">《微信在适配iOS9上遇到的问题和解决方案》</a>也看到了该问题的解决方法。</p>
   </li>
@@ -314,11 +317,12 @@
 
     <p>我做的项目中，主要是UIWebView加载本地的网页，代码如下：</p>
 
-    <pre><code> let path = NSBundle.mainBundle().pathForResource("index", ofType: "htm")
+    <div class="highlighter-rouge"><pre class="highlight"><code> let path = NSBundle.mainBundle().pathForResource("index", ofType: "htm")
  let urlobj = NSURL.fileURLWithPath(path!)
  let request = NSURLRequest(URL: urlobj)
  myWebView.loadRequest(request)
 </code></pre>
+    </div>
   </li>
   <li>
     <p>从网页跳转回本地</p>
@@ -327,12 +331,13 @@
 
     <p>我的解决思路是：web应用中，需要跳转本地的功能，都把链接写成固定格式的</p>
 
-    <pre><code> &lt;a href="m://erweima.com/" class="link_btn link_btn_t"&gt;二维码扫描&lt;/a&gt;
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;a href="m://erweima.com/" class="link_btn link_btn_t"&gt;二维码扫描&lt;/a&gt;
 </code></pre>
+    </div>
 
     <p>UIWebView中有一个方法，可以在链接地址改变时触发，我就是利用该方法，判断UIWebView即将要跳转的链接地址，如果是事先确定的，则执行本地相关操作，如上所述的二维码操作：</p>
 
-    <pre><code> func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest,
+    <div class="highlighter-rouge"><pre class="highlight"><code> func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest,
  navigationType: UIWebViewNavigationType) -&gt; Bool  {
  	let rurl = request.URL
  	if(rurl!.scheme == "m" &amp;&amp; rurl!.host == "erweima.com")
@@ -342,26 +347,29 @@
  	//返回true就会跳转新地址
  }
 </code></pre>
+    </div>
   </li>
   <li>
     <p>二维码扫描功能</p>
 
     <p>这里用到一个用Swift2和AVFoundation写的二维码扫描的类<a href="https://github.com/Recursion0210/QRCode">github</a>，类里用的是UIStoryBoard进行跳转的，我稍微改动了一下，用方法调用的：</p>
 
-    <pre><code>  func tiaozhuan() {
+    <div class="highlighter-rouge"><pre class="highlight"><code>  func tiaozhuan() {
  let scannerVC:ScannerViewController = ScannerViewController()
  scannerVC.delegate = self
 
  self.presentViewController(scannerVC, animated: false, completion: nil)  }
 </code></pre>
+    </div>
 
     <p>ViewController继承了ScannerViewControllerDelegate协议，实现了：</p>
 
-    <pre><code> func barcodeObtained(viewController: ScannerViewController, data: String) {
+    <div class="highlighter-rouge"><pre class="highlight"><code> func barcodeObtained(viewController: ScannerViewController, data: String) {
  //打印二维码扫描的结果
  print(data)        
  }
 </code></pre>
+    </div>
   </li>
 </ol>
 
