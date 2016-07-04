@@ -1,6 +1,6 @@
-# DavidDay's Blog
+# Huangshuai's Blog
 
-### [View Blog →](http://daiweilai.github.io)
+### [View Blog →](http://recursion0210.github.io/)
 
 ## Document
 
